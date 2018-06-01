@@ -14,7 +14,7 @@
  * @since      Class available since Release 1.0
  */
 
-namespace Mastering\SampleModule\Controller\Index;
+namespace Mastering\SampleModule\Controller\Adminhtml\Index;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\App\Action\Action;
