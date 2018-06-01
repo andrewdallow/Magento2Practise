@@ -1,4 +1,10 @@
 <?php
+namespace Mastering\SampleModule\Controller\Index;
+
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\ResponseInterface;
+
 /**
  * Short description for file
  *
@@ -13,16 +19,8 @@
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-
-namespace Mastering\SampleModule\Controller\Index;
-
-use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\ResponseInterface;
-
 class Index extends Action
 {
-    
     /**
      * Execute action based on request and return result
      *

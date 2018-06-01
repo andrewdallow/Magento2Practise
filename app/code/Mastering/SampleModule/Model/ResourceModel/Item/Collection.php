@@ -1,8 +1,12 @@
 <?php
+
+namespace Mastering\SampleModule\Model\ResourceModel\Item;
+
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Mastering\SampleModule\Model\ResourceModel\Item as ItemResource;
+
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Item Collection
  *
  * @category   Zend
  * @package    Zend_Mastering
@@ -13,12 +17,6 @@
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-
-namespace Mastering\SampleModule\Model\ResourceModel\Item;
-
-use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use Mastering\SampleModule\Model\ResourceModel\Item as ItemResource;
-
 class Collection extends AbstractCollection
 {
     protected $idFieldName = 'id';
