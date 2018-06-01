@@ -84,8 +84,8 @@ atlassian*
 /bin/
 /.github/
 /vendor/
-/app/etc/
 /app/autoload.php
 /app/bootstrap.php
 /app/functions.php
 /app/.htaccess
+/app/etc/
