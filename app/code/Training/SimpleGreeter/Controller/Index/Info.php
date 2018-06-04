@@ -7,9 +7,7 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Info Page Controller
  *
  * @category   Zend
  * @package    Zend_Training

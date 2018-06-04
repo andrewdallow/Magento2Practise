@@ -5,9 +5,7 @@ namespace Training\SimpleGreeter\Block;
 use Magento\Framework\View\Element\Template;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Info Page Block
  *
  * @category   Zend
  * @package    Zend_Training
