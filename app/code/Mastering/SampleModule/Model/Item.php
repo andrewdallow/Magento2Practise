@@ -1,7 +1,7 @@
 <?php
 namespace Mastering\SampleModule\Model;
 
-use Magento\Framework\Model\AbstractExtensibleModel;
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Item Model
@@ -15,10 +15,10 @@ use Magento\Framework\Model\AbstractExtensibleModel;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-class Item extends AbstractExtensibleModel
+class Item extends AbstractModel
 {
     protected function _construct()
     {
-        $this->_init(ResourceModel\Item::class);
+        $this->_init(\Mastering\SampleModule\Model\ResourceModel\Item::class);
     }
 }
