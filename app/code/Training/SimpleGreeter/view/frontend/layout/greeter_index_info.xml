@@ -2,11 +2,13 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       layout="1column"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Training_SimpleGreeter::css/info.css"/>
+    </head>
     <referenceContainer name="content">
-        <block class="Training\SimpleGreeter\Block\Display"
-               name="simplegreeter_display"
-               template="hello.phtml"
+        <block class="Training\SimpleGreeter\Block\Info"
+               name="simplegreeter_info"
+               template="info.phtml"
         />
     </referenceContainer>
-
 </page>
