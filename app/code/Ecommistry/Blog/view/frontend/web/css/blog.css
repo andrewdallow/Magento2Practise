@@ -1,0 +1,29 @@
+.blog-posts {
+    padding-top: 20px;
+}
+
+.blog-posts .blog-post {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.blog-posts .post-title {
+}
+
+.blog-posts .post-date {
+    font-weight: bold;
+}
+
+.blog-posts .post-content {
+
+}
+
+.blog-edit {
+    margin-top: 10px;
+}
+
+.blog-edit textarea {
+    width: 100%;
+    height: 400px;
+}

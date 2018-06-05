@@ -1,13 +1,13 @@
 <?php
 
-namespace Ecommistry\Blog\Model\RecourceModel\Blog;
+namespace Ecommistry\Blog\Model\ResourceModel\Blog;
 
+use Ecommistry\Blog\Model\Blog;
+use Ecommistry\Blog\Model\ResourceModel\Blog as BlogResource;
 use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Blog Collection
  *
  * @category   Zend
  * @package    Zend_Ecommistry
@@ -19,19 +19,11 @@ use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
  * @since      Class available since Release 1.0
  */
 class Collection extends AbstractCollection
-
 {
+    protected $_idFieldName = 'blog_id';
     
-    /**
-     * Get resource instance.
-     *
-     * @return \Magento\Framework\Model\ResourceModel\Db\AbstractDb
-     */
-    public function getResource()
+    protected function _construct()
     {
-        $this->_init(
-            'Ecommistry\Blog\Model\Blog',
-            'Ecommistry\Blog\Model\ResourceModel\Blog'
-        );
+        $this->_init(Blog::class, BlogResource::class);
     }
 }

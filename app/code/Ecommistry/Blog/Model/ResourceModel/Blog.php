@@ -1,13 +1,11 @@
 <?php
 
-namespace Ecommistry\Blog\Model\RecourceModel;
+namespace Ecommistry\Blog\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Blog Resource Model
  *
  * @category   Zend
  * @package    Zend_Ecommistry

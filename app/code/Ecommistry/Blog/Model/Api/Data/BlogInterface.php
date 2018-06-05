@@ -3,9 +3,7 @@
 namespace Ecommistry\Blog\Model\Api\Data;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Blog API Interface
  *
  * @category   Zend
  * @package    Zend_Ecommistry
@@ -20,15 +18,15 @@ interface BlogInterface
 {
     public function getId();
     
-    public function setId();
+    public function setId($value);
     
     public function getTitle();
     
-    public function setTitle();
+    public function setTitle($title);
     
     public function getContent();
     
-    public function setContent();
+    public function setContent($content);
     
     public function getCreationTime();
     

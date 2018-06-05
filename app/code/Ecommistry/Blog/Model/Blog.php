@@ -7,9 +7,9 @@ use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
 /**
- * Short description for file
+ * Blog Model
  *
- * Long description for file (if any)...
+ * Model representing a single blog post.
  *
  * @category   Zend
  * @package    Zend_Ecommistry
@@ -23,40 +23,57 @@ use Magento\Framework\Model\AbstractModel;
 class Blog extends AbstractModel implements IdentityInterface, BlogInterface
 {
     const CACHE_TAG = 'ecommistry_blog';
+    protected $_cacheTag = 'ecommistry_blog';
+    protected $_eventPrefix = 'ecommistry_blog';
     
     protected function _construct()
     {
-        $this->_init('Ecommistry\Blog\Model\ResourceModel\Blog');
+        $this->_init(ResourceModel\Blog::class);
     }
     
-    public function getTitle()
+    /**
+     * @return mixed
+     */
+    public function getTitle(): string
     {
-        // TODO: Implement getTitle() method.
+        return $this->getData('title');
     }
     
-    public function setTitle()
+    /**
+     * @param $title
+     */
+    public function setTitle($title)
     {
-        // TODO: Implement setTitle() method.
+        $this->setData('title', $title);
     }
     
-    public function getContent()
+    /**
+     * @return mixed
+     */
+    public function getContent(): string
     {
-        // TODO: Implement getContent() method.
+        return $this->getData('content');
     }
     
-    public function setContent()
+    /**
+     * @param $content
+     */
+    public function setContent($content)
     {
-        // TODO: Implement setContent() method.
+        $this->setData('content', $content);
     }
     
-    public function getCreationTime()
+    /**
+     * @return mixed
+     */
+    public function getCreationTime(): string
     {
-        // TODO: Implement getCreationTime() method.
+        return $this->getData('creation_time');
     }
     
     public function setCreationTime()
     {
-        // TODO: Implement setCreationTime() method.
+        $this->setData('creation_time', date('d-m-Y h:i:s a'));
     }
     
     /**
@@ -68,4 +85,5 @@ class Blog extends AbstractModel implements IdentityInterface, BlogInterface
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
+    
 }

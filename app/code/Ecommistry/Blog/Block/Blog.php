@@ -2,12 +2,13 @@
 
 namespace Ecommistry\Blog\Block;
 
+use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory;
 use Magento\Framework\View\Element\Template;
 
 /**
- * Short description for file
+ * Blog Block
  *
- * Long description for file (if any)...
+ * Handles the display of all blog posts on one page.
  *
  * @category   Zend
  * @package    Zend_Ecommistry
@@ -20,23 +21,22 @@ use Magento\Framework\View\Element\Template;
  */
 class Blog extends Template
 {
-    protected $_blogFactory;
+    private $blogFactory;
     
-    public function _construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Ecommistry\Blog\Model\BlogFactory $blogFactory
+    public function __construct(
+        Template\Context $context,
+        CollectionFactory $blogFactory
     ) {
-        $this->_blogFactory = $blogFactory;
-        parent::_construct($context);
+        $this->blogFactory = $blogFactory;
+        parent::__construct($context);
     }
     
-    public function _prepareLayout()
+    /**
+     * @return \Ecommistry\Blog\Model\Blog[]
+     */
+    public function getPosts()
     {
-        $blog = $this->_blogFactory->create();
-        $collection = $blog->getCollection();
-        foreach ($collection as $item) {
-            var_dump($item->getData());
-        }
-        exit;
+        return $this->blogFactory->create()->getItems();
     }
+    
 }
