@@ -34,7 +34,7 @@ class Blog extends AbstractModel implements IdentityInterface, BlogInterface
     /**
      * @return mixed
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->getData('title');
     }
@@ -50,7 +50,7 @@ class Blog extends AbstractModel implements IdentityInterface, BlogInterface
     /**
      * @return mixed
      */
-    public function getContent(): string
+    public function getContent()
     {
         return $this->getData('content');
     }
@@ -66,7 +66,7 @@ class Blog extends AbstractModel implements IdentityInterface, BlogInterface
     /**
      * @return mixed
      */
-    public function getCreationTime(): string
+    public function getCreationTime()
     {
         return $this->getData('creation_time');
     }
