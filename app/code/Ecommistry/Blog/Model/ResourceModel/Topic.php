@@ -5,9 +5,7 @@ namespace Ecommistry\Blog\Model\ResourceModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Resource Model for a Topic
  *
  * @category   Zend
  * @package    Zend_Ecommistry

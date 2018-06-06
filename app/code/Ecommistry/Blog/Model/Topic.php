@@ -7,9 +7,7 @@ use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Model for a Topic
  *
  * @category   Zend
  * @package    Zend_Ecommistry

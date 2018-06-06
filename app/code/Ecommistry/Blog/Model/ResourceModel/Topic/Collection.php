@@ -7,9 +7,7 @@ use Ecommistry\Blog\Model\Topic;
 use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Collection of Topics
  *
  * @category   Zend
  * @package    Zend_Ecommistry

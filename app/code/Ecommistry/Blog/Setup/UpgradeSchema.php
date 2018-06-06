@@ -10,6 +10,8 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
 /**
  * Upgrade Database
  *
+ * Allows Blogs to contain topics and track when they were last updated.
+ *
  * @category   Zend
  * @package    Zend_Ecommistry
  * @subpackage Blog

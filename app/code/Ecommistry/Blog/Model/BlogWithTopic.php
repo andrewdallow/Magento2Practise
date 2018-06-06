@@ -6,9 +6,7 @@ use Ecommistry\Blog\Model\Api\Data\BlogWithTopicInterface;
 use Ecommistry\Blog\Model\Api\Data\UpdatableInterface;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Model For a Blog With a Topic
  *
  * @category   Zend
  * @package    Zend_Ecommistry

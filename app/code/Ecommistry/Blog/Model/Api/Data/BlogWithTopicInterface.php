@@ -4,9 +4,9 @@
 namespace Ecommistry\Blog\Model\Api\Data;
 
 /**
- * Short description for file
+ * Blogs With Topics Interface
  *
- * Long description for file (if any)...
+ * Requirements for a blog which has a topic.
  *
  * @category   Zend
  * @package    Zend_${Package}

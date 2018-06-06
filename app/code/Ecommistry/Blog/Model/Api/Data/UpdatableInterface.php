@@ -3,9 +3,7 @@
 namespace Ecommistry\Blog\Model\Api\Data;
 
 /**
- * Short description for file
- *
- * Long description for file (if any)...
+ * Updatable Interface
  *
  * @category   Zend
  * @package    Zend_${Package}
