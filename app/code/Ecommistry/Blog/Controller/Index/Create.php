@@ -2,8 +2,8 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
-use Ecommistry\Blog\Model\Blog;
-use Ecommistry\Blog\Model\BlogFactory;
+use Ecommistry\Blog\Model\BlogWithTopic;
+use Ecommistry\Blog\Model\BlogWithTopicFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -31,7 +31,7 @@ class Create extends Action
     
     public function __construct(
         Context $context,
-        BlogFactory $blogFactory,
+        BlogWithTopicFactory $blogFactory,
         BlogResourceFactory $blogResourceFactory
     ) {
         $this->blogFactory = $blogFactory;
@@ -67,22 +67,24 @@ class Create extends Action
     /**
      * @param array $post
      *
-     * @return \Ecommistry\Blog\Model\Blog
+     * @return \Ecommistry\Blog\Model\BlogWithTopic
      */
-    private function getBlog(array $post): Blog
+    private function getBlog(array $post): BlogWithTopic
     {
         $blog = $this->blogFactory->create();
         $blog->setTitle($post['title']);
         $blog->setContent($post['content']);
+        $blog->setTopicId($post['topic']);
+        $blog->setUpdatedTime();
         $blog->setCreationTime();
         
         return $blog;
     }
     
     /**
-     * @param \Ecommistry\Blog\Model\Blog $blog
+     * @param \Ecommistry\Blog\Model\BlogWithTopic $blog
      */
-    private function saveBlog(Blog $blog): void
+    private function saveBlog(BlogWithTopic $blog): void
     {
         try {
             $this->blogResourceFactory->create()->save($blog);

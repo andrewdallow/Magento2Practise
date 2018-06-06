@@ -1,0 +1,47 @@
+<?php
+/**
+ * Edit Page Template
+ *
+ * Form template for editing or creating a new blog post.
+ *
+ * @category   Zend
+ * @package    Zend_${Package}
+ * @subpackage ${Subpackage}
+ * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
+ * @license    http://framework.zend.com/license   BSD License
+ * @version    Release: 1.0
+ * @link       http://framework.zend.com/package/PackageName
+ * @since      Class available since Release 1.0
+ */
+namespace Ecommistry\Blog\view\frontend\templates;
+
+/** @var \Ecommistry\Blog\Block\Blog\EditWithTopics $block */
+
+/** @var \Ecommistry\Blog\Model\BlogWithTopic $post */
+$post = $block->getBlogPost();
+?>
+<div class="blog-edit-back-button">
+    <a href="/blog"><< Back</a>
+</div>
+<div class="blog-edit">
+    <form action="" method="post">
+        <label for="title">Blog Title: </label>
+        <input name="title" id="title" type="text"
+               value="<?php echo $post->getTitle(); ?>"/>
+        <label for="topic">Topic: </label>
+        <select name="topic" id="topic">
+            <?php foreach ($block->getTopics() as $topic) : ?>
+                <?php $selected = $topic->getId() === $post->getTopicId()
+                    ? ' selected' : ''; ?>
+                <option value="<?php echo $topic->getId(); ?>"
+                    <?php echo $selected; ?>
+                ><?php echo $topic->getTitle(); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <label for="content">Content: </label>
+        <textarea name="content" id="content"><?php echo $post->getContent();
+            ?></textarea>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</div>
+

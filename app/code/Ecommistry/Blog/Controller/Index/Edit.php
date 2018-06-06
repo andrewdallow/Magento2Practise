@@ -2,8 +2,8 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
-use Ecommistry\Blog\Model\Blog;
-use Ecommistry\Blog\Model\BlogFactory;
+use Ecommistry\Blog\Model\BlogWithTopic;
+use Ecommistry\Blog\Model\BlogWithTopicFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -31,7 +31,7 @@ class Edit extends Action
     
     public function __construct(
         Context $context,
-        BlogFactory $blogFactory,
+        BlogWithTopicFactory $blogFactory,
         BlogResourceFactory $blogResourceFactory
     ) {
         $this->blogFactory = $blogFactory;
@@ -67,9 +67,9 @@ class Edit extends Action
     /**
      * @param string $id
      *
-     * @return \Ecommistry\Blog\Model\Blog
+     * @return \Ecommistry\Blog\Model\BlogWithTopic
      */
-    private function getBlogById(string $id): Blog
+    private function getBlogById(string $id): BlogWithTopic
     {
         $blog = $this->blogFactory->create();
         $this->blogResourceFactory->create()->load($blog, $id, 'blog_id');
@@ -77,15 +77,18 @@ class Edit extends Action
     }
     
     /**
-     * @param \Ecommistry\Blog\Model\Blog $blog
-     * @param array                       $post
+     * @param \Ecommistry\Blog\Model\BlogWithTopic $blog
+     * @param array                                $post
      *
      * @throws \Exception
      */
-    private function updateBlog(Blog $blog, array $post)
+    private function updateBlog(BlogWithTopic $blog, array $post)
     {
         $blog->setTitle($post['title']);
         $blog->setContent($post['content']);
+        $blog->setTopicId($post['topic']);
+        $blog->setUpdatedTime();
+        
         try {
             $this->blogResourceFactory->create()->save($blog);
             $this->messageManager->addSuccessMessage('Blog Post Updated');

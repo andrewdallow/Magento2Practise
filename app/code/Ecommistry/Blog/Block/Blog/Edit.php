@@ -4,6 +4,7 @@ namespace Ecommistry\Blog\Block\Blog;
 
 use Ecommistry\Blog\Model\BlogFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template;
 
 /**
@@ -20,7 +21,7 @@ use Magento\Framework\View\Element\Template;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-class Edit extends Template
+class Edit extends Template implements IdentityInterface
 {
     private $blogFactory;
     private $blogResourceFactory;
@@ -59,5 +60,15 @@ class Edit extends Template
             return '/blog/index/edit?id=' . $this->getRequest()->getParam('id');
         }
         return '/blog/index/edit';
+    }
+    
+    /**
+     * Return unique ID(s) for each object in system
+     *
+     * @return string[]
+     */
+    public function getIdentities()
+    {
+        return $this->getBlogPost()->getIdentities();
     }
 }

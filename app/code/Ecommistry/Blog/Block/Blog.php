@@ -3,6 +3,7 @@
 namespace Ecommistry\Blog\Block;
 
 use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template;
 
 /**
@@ -19,7 +20,7 @@ use Magento\Framework\View\Element\Template;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-class Blog extends Template
+class Blog extends Template implements IdentityInterface
 {
     private $blogFactory;
     
@@ -36,7 +37,23 @@ class Blog extends Template
      */
     public function getPosts()
     {
-        return $this->blogFactory->create()->getItems();
+        $collection = $this->blogFactory->create()->clear();
+        $collection->load();
+        return $collection->getItems();
     }
     
+    /**
+     * Return unique ID(s) for each object in system
+     *
+     * @return string[]
+     */
+    public function getIdentities()
+    {
+        $identities = [];
+        $posts = $this->getPosts();
+        foreach ($posts as $post) {
+            $identities[] = $post->getIdentities()[0];
+        }
+        return $identities;
+    }
 }
