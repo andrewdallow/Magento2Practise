@@ -1,4 +1,4 @@
-#Ecommistry Blog Module Example
+# Ecommistry Blog Module Example
 
 Example of a Magento 2 Blog Module with Create/Read/Update/Delete functionality.
 
