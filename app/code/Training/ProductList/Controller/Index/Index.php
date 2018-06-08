@@ -64,10 +64,6 @@ class Index extends Action
     {
         $this->productCollection
             ->addAttributeToSelect('*')
-            ->addAttributeToFilter(InstallData::PRODUCT_LIST_ATTRIBUTE, 1)
-            ->addAttributeToSort(
-                $this->getRequest()->getParam('product_list_order'),
-                $this->getRequest()->getParam('product_list_dir')
-            );
+            ->addAttributeToFilter(InstallData::PRODUCT_LIST_ATTRIBUTE, 1);
     }
 }
