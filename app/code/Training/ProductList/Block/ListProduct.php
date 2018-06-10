@@ -2,12 +2,13 @@
 
 namespace Training\ProductList\Block;
 
+use Magento\Catalog\Block\Product\ProductList\Toolbar;
 use Magento\Catalog\Model\ResourceModel\Collection\AbstractCollection;
 
 /**
- * Class ProductList
+ * Class ListProduct
  *
- * Long description for Class (if any)...
+ * Block representing a custom product list with the handle_display attribute.
  *
  * @category   Training
  * @package    Training_ProductList
@@ -19,6 +20,7 @@ use Magento\Catalog\Model\ResourceModel\Collection\AbstractCollection;
  */
 class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
 {
+    
     /**
      * @return \Magento\Eav\Model\Entity\Collection\AbstractCollection
      */
@@ -32,6 +34,19 @@ class ListProduct extends \Magento\Catalog\Block\Product\ListProduct
      */
     public function setProductCollection(AbstractCollection $collection)
     {
+        $this->configureToolbar();
         $this->_productCollection = $collection;
+    }
+    
+    /**
+     * Configure the custom toolbar
+     */
+    private function configureToolbar(): void
+    {
+        /** @var Toolbar $toolbarLayout */
+        $toolbar = $this->getToolbarBlock();
+        $toolbar->removeOrderFromAvailableOrders('position');
+        $toolbar->addOrderToAvailableOrders('created_at', __('New'));
+        $toolbar->setDefaultOrder('created_at');
     }
 }
