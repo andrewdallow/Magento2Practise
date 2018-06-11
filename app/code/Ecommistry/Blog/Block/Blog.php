@@ -3,6 +3,7 @@
 namespace Ecommistry\Blog\Block;
 
 use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template;
 
@@ -22,12 +23,19 @@ use Magento\Framework\View\Element\Template;
  */
 class Blog extends Template implements IdentityInterface
 {
+    private const XML_PATH_NUMBER_OF_POSTS_TO_SHOW = 'blogs/settings/numberOfPostsToShow';
+    
+    /** @var \Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory */
     private $blogFactory;
+    /** @var \Magento\Framework\App\Config\ScopeConfigInterface */
+    private $config;
     
     public function __construct(
         Template\Context $context,
-        CollectionFactory $blogFactory
+        CollectionFactory $blogFactory,
+        ScopeConfigInterface $config
     ) {
+        $this->config = $config;
         $this->blogFactory = $blogFactory;
         parent::__construct($context);
     }
@@ -37,8 +45,15 @@ class Blog extends Template implements IdentityInterface
      */
     public function getPosts()
     {
+        $numberOfPostsToShow = (int)$this->config->getValue(
+            self::XML_PATH_NUMBER_OF_POSTS_TO_SHOW
+        );
+    
+        /** @var \Ecommistry\Blog\Model\ResourceModel\Blog\Collection $collection */
         $collection = $this->blogFactory->create()->clear();
-        $collection->load();
+        $collection->addFieldToSelect('*')
+            ->setPageSize($numberOfPostsToShow)
+            ->load();
         return $collection->getItems();
     }
     

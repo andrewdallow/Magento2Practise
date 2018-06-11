@@ -22,8 +22,6 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Index extends Action
 {
-    /** @var \Ecommistry\Blog\Helper\Customer */
-    private $customerHelper;
     /** @var \Magento\Customer\Model\Session */
     private $session;
     

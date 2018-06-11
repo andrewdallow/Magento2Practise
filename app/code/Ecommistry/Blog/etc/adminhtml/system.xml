@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ecommistry" translate="label" sortOrder="10">
+            <label>Ecommistry</label>
+        </tab>
+        <section id="blogs" translate="label" sortOrder="10"
+                 showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Blogs</label>
+            <tab>ecommistry</tab>
+            <resource>Ecommistry_ProductList::ecommistry</resource>
+            <group id="settings" translate="label" sortOrder="10"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Blog Settings</label>
+                <field id="numberOfPostsToShow" translate="label" type="text"
+                       sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Number of Posts to Show</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

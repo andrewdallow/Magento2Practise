@@ -4,6 +4,7 @@ namespace Ecommistry\Blog\Block;
 
 use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory as BlogCollectionFactory;
 use Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory as TopicCollectionFactory;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Template\Context;
 
 /**
@@ -27,10 +28,11 @@ class BlogWithTopic extends Blog
     public function __construct(
         Context $context,
         BlogCollectionFactory $blogFactory,
+        ScopeConfigInterface $config,
         TopicCollectionFactory $topicCollectionFactory
     ) {
         $this->topicCollectionFactory = $topicCollectionFactory;
-        parent::__construct($context, $blogFactory);
+        parent::__construct($context, $blogFactory, $config);
     }
     
     public function getTopicById($id)
