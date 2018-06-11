@@ -2,7 +2,10 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
+use Ecommistry\Blog\Helper\Customer;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 
@@ -20,6 +23,18 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Index extends Action
 {
+    /** @var \Ecommistry\Blog\Helper\Customer */
+    private $customerHelper;
+    /** @var \Magento\Customer\Model\Session */
+    private $session;
+    
+    public function __construct(
+        Context $context,
+        Session $session
+    ) {
+        $this->session = $session;
+        parent::__construct($context);
+    }
     
     /**
      * Execute action based on request and return result
@@ -31,7 +46,15 @@ class Index extends Action
      */
     public function execute()
     {
-        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        
+        if (!$this->session->isLoggedIn()) {
+            $result
+                = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            $result->setPath('*/*/message');
+        } else {
+            $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        }
+        return $result;
     }
     
     

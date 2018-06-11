@@ -5,9 +5,9 @@ namespace Ecommistry\Blog\Controller\Index;
 use Ecommistry\Blog\Model\BlogWithTopic;
 use Ecommistry\Blog\Model\BlogWithTopicFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
@@ -26,34 +26,45 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Edit extends Action
 {
+    /** @var \Ecommistry\Blog\Model\BlogWithTopicFactory */
     private $blogFactory;
+    /** @var \Ecommistry\Blog\Model\ResourceModel\BlogFactory */
     private $blogResourceFactory;
+    /** @var \Magento\Customer\Model\Session */
+    private $session;
     
     public function __construct(
         Context $context,
         BlogWithTopicFactory $blogFactory,
-        BlogResourceFactory $blogResourceFactory
+        BlogResourceFactory $blogResourceFactory,
+        Session $session
     ) {
+        $this->session = $session;
         $this->blogFactory = $blogFactory;
         $this->blogResourceFactory = $blogResourceFactory;
         parent::__construct($context);
     }
     
     /**
-     * Execute action based on request and return result
-     *
-     * Note: Request will be added as operation argument in future
-     *
-     * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
+     * @return \Magento\Framework\Controller\ResultInterface
+     * @throws \Exception
      */
     public function execute()
     {
-        $this->updateBlogIfPost();
-        
-        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        if (!$this->session->isLoggedIn()) {
+            $result
+                = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            $result->setPath('*/*/message');
+        } else {
+            $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+            $this->updateBlogIfPost();
+        }
+        return $result;
     }
     
+    /**
+     * @throws \Exception
+     */
     private function updateBlogIfPost()
     {
         $post = (array)$this->getRequest()->getParams();
@@ -95,8 +106,5 @@ class Edit extends Action
         } catch (\Exception $alreadyExistsException) {
             $this->messageManager->addErrorMessage('Something went wrong');
         }
-        
     }
-    
-    
 }

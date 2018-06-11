@@ -5,6 +5,7 @@ namespace Ecommistry\Blog\Controller\Index;
 use Ecommistry\Blog\Model\BlogWithTopic;
 use Ecommistry\Blog\Model\BlogWithTopicFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
@@ -26,14 +27,20 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Create extends Action
 {
+    /** @var \Ecommistry\Blog\Model\BlogWithTopicFactory */
     private $blogFactory;
+    /** @var \Ecommistry\Blog\Model\ResourceModel\BlogFactory */
     private $blogResourceFactory;
+    /** @var \Magento\Customer\Model\Session */
+    private $session;
     
     public function __construct(
         Context $context,
         BlogWithTopicFactory $blogFactory,
-        BlogResourceFactory $blogResourceFactory
+        BlogResourceFactory $blogResourceFactory,
+        Session $session
     ) {
+        $this->session = $session;
         $this->blogFactory = $blogFactory;
         $this->blogResourceFactory = $blogResourceFactory;
         parent::__construct($context);
@@ -49,12 +56,27 @@ class Create extends Action
      */
     public function execute()
     {
-        $this->createNewBlogIfPost();
-        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        if (!$this->session->isLoggedIn()) {
+            $result
+                = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            $result->setPath('*/*/message');
+        } else {
+            $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+            $this->createNewBlogIfPost();
+        }
+    
+        return $result;
     }
     
     private function createNewBlogIfPost(): void
     {
+        if (!$this->session->isLoggedIn()) {
+            $result
+                = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+            $result->setPath('*/*/message');
+        } else {
+            $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        }
         $post = (array)$this->getRequest()->getParams();
         
         if (isset($post['submit'])) {
