@@ -9,7 +9,7 @@ use Magento\Framework\App\Helper\Context;
 /**
  * Class Customer
  *
- * Long description for Class (if any)...
+ * Helper methods related to customers usage of the blog.
  *
  * @category   Training
  * @package    Training_Blog

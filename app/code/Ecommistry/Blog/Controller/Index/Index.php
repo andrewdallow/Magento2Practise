@@ -2,7 +2,6 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
-use Ecommistry\Blog\Helper\Customer;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
