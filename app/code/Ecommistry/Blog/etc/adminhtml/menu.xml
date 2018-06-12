@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ecommistry_Blog" title="Blog"
+             module="Ecommistry_Blog"
+             resource="Ecommistry_Blog::ecommistry"
+             translate="title"
+             sortOrder="1000"
+             action="blog"
+        />
+    </menu>
+</config>

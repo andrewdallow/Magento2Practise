@@ -9,7 +9,7 @@
                  showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Blogs</label>
             <tab>ecommistry</tab>
-            <resource>Ecommistry_ProductList::ecommistry</resource>
+            <resource>Ecommistry_Blog::ecommistry</resource>
             <group id="settings" translate="label" sortOrder="10"
                    showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Blog Settings</label>

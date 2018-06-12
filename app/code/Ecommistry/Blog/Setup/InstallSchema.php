@@ -23,6 +23,7 @@ use Magento\Framework\Setup\SchemaSetupInterface;
  */
 class InstallSchema implements InstallSchemaInterface
 {
+    public const BLOG_TABLE_NAME = 'ecommistry_blog';
     /**
      * @param \Magento\Framework\Setup\SchemaSetupInterface   $setup
      * @param \Magento\Framework\Setup\ModuleContextInterface $context
@@ -38,7 +39,7 @@ class InstallSchema implements InstallSchemaInterface
         $installer->startSetup();
         
         $table = $installer->getConnection()->newTable(
-            $installer->getTable('ecommistry_blog')
+            $installer->getTable(self::BLOG_TABLE_NAME)
         )->addColumn(
             'blog_id',
             Table::TYPE_SMALLINT,

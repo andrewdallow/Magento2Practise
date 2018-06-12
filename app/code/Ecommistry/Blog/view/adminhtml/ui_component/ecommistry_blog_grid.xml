@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ecommistry_blog_grid.ecommistry_blog_grid_data_source</item>
+            <item name="deps" xsi:type="string">ecommistry_blog_grid.ecommistry_blog_grid_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">ecommistry_blog_columns</item>
+    </argument>
+    <dataSource name="ecommistry_blog_grid_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">ecommistry_blog_grid_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">blog_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="ecommistry_blog_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="childDefaults" xsi:type="array">
+                    <item name="fieldAction" xsi:type="array">
+                        <item name="provider" xsi:type="string">ecommistry_blog_grid.ecommistry_blog_grid.ecommistry_blog_columns.actions</item>
+                        <item name="target" xsi:type="string">applyAction</item>
+                        <item name="params" xsi:type="array">
+                            <item name="0" xsi:type="string">view</item>
+                            <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="creation_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <dateFormat>MMM dd, YYYY hh:mm:ss a</dateFormat>
+                <label translate="true">Date Created</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="title">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Blog Title</label>
+            </settings>
+        </column>
+        <column name="topic_id" class="Ecommistry\Blog\Ui\Component\Listing\Columns\Topic">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Topic Name</label>
+            </settings>
+        </column>
+        <column name="updated_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <dateFormat>MMM dd, YYYY hh:mm:ss a</dateFormat>
+                <label translate="true">Last Modified</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
