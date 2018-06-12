@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="created_at">
+            <settings>
+                <dateFormat>MMM dd, YYYY</dateFormat>
+            </settings>
+        </column>
+        <column name="base_tax_amount" class="Magento\Sales\Ui\Component\Listing\Column\Price">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Base Tax Amount</label>
+            </settings>
+        </column>
+    </columns>
+</listing>
