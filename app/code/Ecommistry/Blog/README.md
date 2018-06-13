@@ -78,7 +78,7 @@ Ui Components are classified under two categories:
     grid columns, and other secondary components.
     
  #### Extras:
- Creates a Topic Ui component which extends the Column Component which takes 
+ Created a Topic Ui component which extends the Column Component and takes 
  the topic_id from the ecommistry_blog table and returns the corresponding topic 
  name. 
  
