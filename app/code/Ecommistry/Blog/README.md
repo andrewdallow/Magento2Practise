@@ -30,7 +30,7 @@ Ui Components are classified under two categories:
  Magento recommends using the UI components as much as possible because they 
  work well together, communicating with each other via the uiRegistry that tracks 
  their asynchronous initialisation. Adding new features is as easy as extending 
- existing components. This allows one reuse code instead of recreating it for 
+ existing components. This allows one to reuse code instead of recreating it for 
  each usage.  
  
  UI components are defined by:
@@ -48,7 +48,7 @@ Ui Components are classified under two categories:
   
         Ecommistry\Blog\Controller\Adminhtml\Index\Index 
  
- 2. Create the route 'blog' route (routes.xml) and 'menu' (menu.xml) item for 
+ 2. Create the 'blog' route (routes.xml) and 'menu' (menu.xml) item for 
     the admin area.
  
  3. Create the grid collection model for the ecommistry_blog table which extends 
