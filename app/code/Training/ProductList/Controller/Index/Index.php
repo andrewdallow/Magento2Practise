@@ -57,13 +57,17 @@ class Index extends Action
      */
     public function execute()
     {
-        $this->checkLoggedIn();
+        /** @var \Magento\Framework\View\Result\Page $result */
         $result = $this->pageFactory->create();
-        $this->initialiseProductListCollection();
-        
-        /** @var \Training\ProductList\Block\ListProduct $list */
-        $list = $result->getLayout()->getBlock('custom.products.list');
-        $list->setProductCollection($this->productCollection);
+        if ($this->session->isLoggedIn()) {
+            /** @var \Training\ProductList\Block\ListProduct $list */
+            $list = $result->getLayout()->getBlock('custom.products.list');
+            $this->initialiseProductListCollection();
+            $list->setProductCollection($this->productCollection);
+        } else {
+            $this->session->setAfterAuthUrl($this->urlInterface->getCurrentUrl());
+            $this->session->authenticate();
+        }
         
         return $result;
     }
@@ -76,16 +80,5 @@ class Index extends Action
         $this->productCollection
             ->addAttributeToSelect('*')
             ->addAttributeToFilter(InstallData::PRODUCT_LIST_ATTRIBUTE, 1);
-    }
-    
-    /**
-     * Check customer is logged in
-     */
-    private function checkLoggedIn()
-    {
-        if (!$this->session->isLoggedIn()) {
-            $this->session->setAfterAuthUrl($this->urlInterface->getCurrentUrl());
-            $this->session->authenticate();
-        }
     }
 }

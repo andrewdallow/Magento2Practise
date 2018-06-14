@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="Training_ProductList" setup_version="1.0.0">
         <sequence>
-            <!-- Dependent Modules -->
+            <module name="Magento_Catalog"/>
         </sequence>
     </module>
 </config>
