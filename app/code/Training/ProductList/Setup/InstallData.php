@@ -6,6 +6,7 @@ use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
 use Magento\Eav\Model\Entity\Attribute\Source\Boolean;
 use Magento\Eav\Setup\EavSetupFactory;
+use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -26,6 +27,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 class InstallData implements InstallDataInterface
 {
     public const PRODUCT_LIST_ATTRIBUTE = 'handle_display';
+    /** @var \Magento\Eav\Setup\EavSetupFactory */
     private $eavSetupFactory;
     
     /**
@@ -39,40 +41,49 @@ class InstallData implements InstallDataInterface
     }
     
     /**
-     * Installs data for a module
+     * @param \Magento\Framework\Setup\ModuleDataSetupInterface $setup
+     * @param \Magento\Framework\Setup\ModuleContextInterface   $context
      *
-     * @param ModuleDataSetupInterface $setup
-     * @param ModuleContextInterface   $context
-     *
-     * @return void
+     * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
     public function install(
         ModuleDataSetupInterface $setup,
         ModuleContextInterface $context
     ) {
+        /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create();
-        $eavSetup->addAttribute(
+    
+        $existingAttribute = $eavSetup->getAttributeId(
             Product::ENTITY,
-            self::PRODUCT_LIST_ATTRIBUTE,
-            [
-                'group'                   => 'General',
-                'type'                    => 'int',
-                'label'                   => 'Display on Product List',
-                'input'                   => 'select',
-                'class'                   => '',
-                'source'                  => Boolean::class,
-                'global'                  => ScopedAttributeInterface::SCOPE_GLOBAL,
-                'default'                 => '0',
-                'visible'                 => true,
-                'required'                => false,
-                'user_defined'            => false,
-                'searchable'              => false,
-                'filterable'              => true,
-                'comparable'              => false,
-                'visible_on_front'        => false,
-                'unique'                  => false,
-                'used_in_product_listing' => true
-            ]
+            self::PRODUCT_LIST_ATTRIBUTE
         );
+    
+        if (!$existingAttribute) {
+            $eavSetup->addAttribute(
+                Product::ENTITY,
+                self::PRODUCT_LIST_ATTRIBUTE,
+                [
+                    'group'                   => 'General',
+                    'type'                    => 'int',
+                    'label'                   => 'Display on Product List',
+                    'input'                   => 'select',
+                    'class'                   => '',
+                    'source'                  => Boolean::class,
+                    'global'                  => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'default'                 => '0',
+                    'visible'                 => true,
+                    'required'                => false,
+                    'user_defined'            => false,
+                    'searchable'              => false,
+                    'filterable'              => true,
+                    'comparable'              => false,
+                    'visible_on_front'        => false,
+                    'unique'                  => false,
+                    'used_in_product_listing' => true
+                ]
+            );
+        } else {
+            throw new AlreadyExistsException();
+        }
     }
 }
