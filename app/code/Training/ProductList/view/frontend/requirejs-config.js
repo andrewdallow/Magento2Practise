@@ -1,6 +1,6 @@
 var config = {
     paths: {
-        slick: 'Training_ProductList/js/slick'
+        slick: '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min'
     },
     shim: {
         slick: {

@@ -9,3 +9,11 @@
 .mode-slider:before {
     content: '\e617\e608' !important;
 }
+
+.productlist-slider {
+    visibility: hidden;
+}
+
+.productlist-slider.slick-initialized {
+    visibility: visible;
+}

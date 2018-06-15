@@ -218,6 +218,7 @@ $_helper = $this->helper(Output::class);
             ], function ($) {
                 jQuery(document).ready(function () {
                     jQuery(".productlist-slider").slick({
+                        lazyLoad: 'ondemand',
                         dots: true,
                         arrows: true,
                         slidesToShow: 3,
