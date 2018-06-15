@@ -3,13 +3,16 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <title>Product List</title>
+        <css src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" src_type="url"/>
+        <css src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" src_type="url"/>
+        <css src="Training_ProductList::css/slider.css"/>
     </head>
     <update handle="customer_account"/>
     <body>
         <referenceContainer name="content">
             <block class="Training\ProductList\Block\ListProduct"
                    name="custom.products.list" as="product_list"
-                   template="Magento_Catalog::product/list.phtml">
+                   template="Training_ProductList::product/list.phtml">
                 <container name="category.product.list.additional" as="additional"/>
                 <block class="Magento\Framework\View\Element\RendererList"
                        name="category.product.type.details.renderers" as="details.renderers">
@@ -21,7 +24,7 @@
                            name="category.product.addto.compare" as="compare"
                            template="Magento_Catalog::product/list/addto/compare.phtml"/>
                 </block>
-                <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar"
+                <block class="Training\ProductList\Block\Toolbar" name="product_list_toolbar"
                        template="Magento_Catalog::product/list/toolbar.phtml">
                     <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
 

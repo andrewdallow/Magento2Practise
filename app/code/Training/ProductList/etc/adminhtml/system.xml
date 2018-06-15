@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="product_list" translate="label" sortOrder="10"
+                 showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>My Account Product List</label>
+            <tab>catalog</tab>
+            <resource>Training_ProductList::training</resource>
+            <group id="settings" translate="label" sortOrder="10"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Product List Settings</label>
+                <field id="productListName" translate="label" type="text"
+                       sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>List Name</label>
+                </field>
+                <field id="numberOfProductToList" translate="label" type="text"
+                       sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Maximum Number of Products to List</label>
+                </field>
+                <field id="slider" translate="label" type="select"
+                       sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Slider</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

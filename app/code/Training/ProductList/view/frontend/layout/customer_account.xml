@@ -6,7 +6,8 @@
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="demo-link">
                 <arguments>
                     <argument name="path" xsi:type="string">productlist</argument>
-                    <argument name="label" xsi:type="string">Product List</argument>
+                    <argument name="label" xsi:type="helper"
+                              helper="Training\ProductList\Helper\Config::getProductListName"/>
                 </arguments>
             </block>
         </referenceBlock>

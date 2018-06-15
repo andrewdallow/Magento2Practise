@@ -26,6 +26,7 @@ use PHPUnit\Framework\TestCase;
 use Training\ProductList\Controller\Index\Index;
 use Magento\Framework\View\LayoutInterface;
 use Training\ProductList\Block\ListProduct;
+use Training\ProductList\Helper\Config;
 
 class IndexTest extends TestCase
 {
@@ -46,12 +47,15 @@ class IndexTest extends TestCase
     private $layout;
     /** @var \Training\ProductList\Block\ListProduct */
     private $block;
+    /** @var \Training\ProductList\Helper\Config */
+    private $configHelper;
     
     public function setUp()
     {
         
         $objectManager = new ObjectManager($this);
-        
+    
+        $this->configHelper = $this->createMock(Config::class);
         $this->productCollection = $this->createMock(Collection::class);
         $this->pageFactory = $this->createMock(PageFactory::class);
         $this->page = $this->createMock(Page::class);
@@ -72,7 +76,8 @@ class IndexTest extends TestCase
                 'context'           => $context,
                 'productCollection' => $this->productCollection,
                 'pageFactory'       => $this->pageFactory,
-                'session'           => $this->session
+                'session'           => $this->session,
+                'configHelper'      => $this->configHelper
             ]
         );
     }
@@ -82,8 +87,60 @@ class IndexTest extends TestCase
         $this->action = null;
     }
     
-    public function testExecuteCustomerLoggedOn()
+    public function testExecuteCustomerLoggedOnAndHasProducts()
     {
+        $numProductsToShow = 10;
+        $this->pageFactory->expects($this->once())
+            ->method('create')
+            ->will($this->returnValue($this->page));
+        
+        $this->session->expects($this->once())
+            ->method('isLoggedIn')
+            ->willReturn(true);
+        
+        $this->page->expects($this->once())
+            ->method('getLayout')
+            ->willReturn($this->layout);
+        
+        $this->layout->expects($this->once())
+            ->method('getBlock')
+            ->with('custom.products.list')
+            ->willReturn($this->block);
+    
+        $this->configHelper->expects($this->once())
+            ->method('getNumberOfProductsToShow')
+            ->willReturn($numProductsToShow);
+        
+        $this->productCollection->expects($this->once())
+            ->method('addAttributeToSelect')
+            ->with('*')
+            ->willReturnSelf();
+        
+        $this->productCollection->expects($this->once())
+            ->method('addAttributeToFilter')
+            ->with('handle_display', 1)
+            ->willReturnSelf();
+    
+        $this->productCollection->expects($this->once())
+            ->method('setPageSize')
+            ->willReturnSelf();
+    
+        $this->productCollection->expects($this->once())
+            ->method('load')
+            ->willReturnSelf();
+        
+        $this->block->expects($this->once())
+            ->method('setProductCollection')
+            ->with($this->productCollection);
+        
+        $result = $this->action->execute();
+        
+        $this->assertEquals($this->page, $result);
+    }
+    
+    public function testExecuteCustomerLoggedOnAndNoProducts()
+    {
+        $numProductsToShow = 0;
         $this->pageFactory->expects($this->once())
             ->method('create')
             ->will($this->returnValue($this->page));
@@ -101,14 +158,17 @@ class IndexTest extends TestCase
             ->with('custom.products.list')
             ->willReturn($this->block);
         
+        $this->configHelper->expects($this->once())
+            ->method('getNumberOfProductsToShow')
+            ->willReturn($numProductsToShow);
+        
         $this->productCollection->expects($this->once())
-            ->method('addAttributeToSelect')
-            ->with('*')
+            ->method('addFieldToFilter')
+            ->with('entity_id', 0)
             ->willReturnSelf();
         
         $this->productCollection->expects($this->once())
-            ->method('addAttributeToFilter')
-            ->with('handle_display', 1)
+            ->method('load')
             ->willReturnSelf();
         
         $this->block->expects($this->once())
@@ -118,7 +178,6 @@ class IndexTest extends TestCase
         $result = $this->action->execute();
         
         $this->assertEquals($this->page, $result);
-        
     }
     
     public function testExecuteCustomerLoggedOff()

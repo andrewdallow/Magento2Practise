@@ -14,12 +14,15 @@ use Magento\Framework\Data\Helper\PostHelper;
 use Magento\Framework\Registry;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Framework\View\LayoutInterface;
+use Magento\Framework\View\Page\Config as PageConfig;
+use Magento\Framework\View\Page\Title;
 use Training\ProductList\Block\ListProduct;
 use PHPUnit\Framework\TestCase;
 use Magento\Catalog\Block\Product\Context;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Pricing\Render;
 use Magento\Framework\Url\Helper\Data;
+use Training\ProductList\Helper\Config;
 
 class ListProductTest extends TestCase
 {
@@ -94,6 +97,10 @@ class ListProductTest extends TestCase
      */
     private $renderer;
     
+    private $configHelper;
+    
+    private $pageConfig;
+    
     public function setUp()
     {
         $objectManager = new ObjectManager($this);
@@ -124,6 +131,7 @@ class ListProductTest extends TestCase
             ->disableOriginalConstructor()->getMock();
         $eventManager = $this->getMockForAbstractClass(ManagerInterface::class,
             [], '', false);
+        $this->pageConfig = $this->createMock(PageConfig::class);
         
         $this->context->expects($this->any())->method('getRegistry')
             ->willReturn($this->registryMock);
@@ -133,6 +141,9 @@ class ListProductTest extends TestCase
             ->willReturn($this->layoutMock);
         $this->context->expects($this->any())->method('getEventManager')
             ->willReturn($eventManager);
+        $this->context->expects($this->any())->method('getPageConfig')
+            ->willReturn($this->pageConfig);
+        $this->configHelper = $this->createMock(Config::class);
         
         
         $this->block = $objectManager->getObject(
@@ -144,6 +155,7 @@ class ListProductTest extends TestCase
                 'cartHelper'     => $this->cartHelperMock,
                 'postDataHelper' => $this->postDataHelperMock,
                 'urlHelper'      => $this->urlHelperMock,
+                'configHelper'   => $this->configHelper
             ]
         );
         $this->block->setToolbarBlockName('mock');
@@ -175,5 +187,25 @@ class ListProductTest extends TestCase
         $this->block->setProductCollection($this->prodCollectionMock);
         $collection = $this->block->getLoadedProductCollection();
         $this->assertEquals($this->prodCollectionMock, $collection);
+    }
+    
+    public function testPrepareLayoutSettingTitle()
+    {
+        $title = $this->createMock(Title::class);
+        
+        $this->pageConfig->expects($this->once())
+            ->method('getTitle')
+            ->willReturn($title);
+        
+        $this->configHelper->expects($this->once())
+            ->method('getProductListName')
+            ->willReturn('');
+        
+        $title->expects($this->once())
+            ->method('set')
+            ->willReturn($title);
+        
+        $this->block->_prepareLayout();
+        
     }
 }

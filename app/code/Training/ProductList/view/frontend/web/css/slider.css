@@ -1,0 +1,11 @@
+.slick-prev:before, .slick-next:before {
+    color: #3399cc !important;
+}
+
+.slick-slider {
+    left: 25px !important;
+}
+
+.mode-slider:before {
+    content: '\e617\e608' !important;
+}

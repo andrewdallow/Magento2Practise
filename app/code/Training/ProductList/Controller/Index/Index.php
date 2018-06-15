@@ -8,6 +8,7 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\View\Result\PageFactory;
+use Training\ProductList\Helper\Config;
 use Training\ProductList\Setup\InstallData;
 
 /**
@@ -34,16 +35,20 @@ class Index extends Action
     
     private $urlInterface;
     
+    private $helper;
+    
     public function __construct(
         Context $context,
         CollectionFactory $collectionFactory,
         PageFactory $pageFactory,
-        Session $session
+        Session $session,
+        Config $configHelper
     ) {
         $this->session = $session;
         $this->urlInterface = $context->getUrl();
         $this->pageFactory = $pageFactory;
         $this->productCollection = $collectionFactory->create();
+        $this->helper = $configHelper;
         parent::__construct($context);
     }
     
@@ -57,6 +62,7 @@ class Index extends Action
      */
     public function execute()
     {
+    
         /** @var \Magento\Framework\View\Result\Page $result */
         $result = $this->pageFactory->create();
         if ($this->session->isLoggedIn()) {
@@ -77,8 +83,17 @@ class Index extends Action
      */
     private function initialiseProductListCollection()
     {
-        $this->productCollection
-            ->addAttributeToSelect('*')
-            ->addAttributeToFilter(InstallData::PRODUCT_LIST_ATTRIBUTE, 1);
+        $numberOfProductsToShow = $this->helper->getNumberOfProductsToShow();
+        if ($numberOfProductsToShow) {
+            $this->productCollection
+                ->addAttributeToSelect('*')
+                ->addAttributeToFilter(InstallData::PRODUCT_LIST_ATTRIBUTE, 1)
+                ->setPageSize($numberOfProductsToShow)
+                ->load();
+        } else {
+            $this->productCollection
+                ->addFieldToFilter('entity_id', 0)
+                ->load();
+        }
     }
 }
