@@ -7,7 +7,7 @@ Converted from Magento 1.9 [https://github.com/andrewdallow/MagentoExtensionAssi
 
 ## The handle_display Attribute
 
-A new attribute has been added to the catalog_product_entity called handle_display.
+A new attribute has been added to the catalog_product entity called handle_display.
 If the attribute name 'handle_display' already exist in the database then
 an exception is thrown and logged in the Magento Exception log. 
 
@@ -38,11 +38,10 @@ Configuration Options. They are setup in the system.xml file. These are found at
         Stores | Configuration | Catalog | My Account Product List
         
 Note: the 'Maximum Number of Products to List' option is validated 
- so that only integer numbers can be specified and is a required field. The 
- Product List Name is also validated as a required field. 
+ so that only integer numbers can be specified and is a required field. A value 
+ of '0' will list no products, while a value of '10' will list up to '10' products. 
 
-A value of '0' will list no products, while a value of '10' will list up to '10' 
-products. 
+The Product List Name is also validated as a required field. 
 
 Default Values:
 
@@ -68,7 +67,7 @@ index page of productlist.
 #### Product List
 
 The Product list block, Training\ProductList\Block\ListProduct, extends the Magento 
-ListProduct block and overrides the setProductCollection() and getLoadedCollection 
+ListProduct block and overrides the setProductCollection() and getLoadedCollection() 
 methods to only retrieve a product collection where 'handle_display' is equal to 1.
 
 The display of the list is adapted from the Magento 2 default luma theme.
