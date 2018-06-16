@@ -38,8 +38,8 @@ Configuration Options. They are setup in the system.xml file. These are found at
         Stores | Configuration | Catalog | My Account Product List
         
 Note: the 'Maximum Number of Products to List' option is validated 
-(Training\ProductList\Model\ConfigurationValidation) so that only integer
-numbers can be specified. 
+ so that only integer numbers can be specified and is a required field. The 
+ Product List Name is also validated as a required field. 
 
 A value of '0' will list no products, while a value of '10' will list up to '10' 
 products. 
