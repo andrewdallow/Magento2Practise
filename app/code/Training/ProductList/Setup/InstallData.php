@@ -10,6 +10,7 @@ use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Install Schema
@@ -30,13 +31,19 @@ class InstallData implements InstallDataInterface
     /** @var \Magento\Eav\Setup\EavSetupFactory */
     private $eavSetupFactory;
     
+    private $logger;
+    
     /**
      * InstallData constructor.
      *
      * @param \Magento\Eav\Setup\EavSetupFactory $eavSetupFactory
      */
-    public function __construct(EavSetupFactory $eavSetupFactory)
+    public function __construct(
+        EavSetupFactory $eavSetupFactory,
+        LoggerInterface $logger
+    )
     {
+        $this->logger = $logger;
         $this->eavSetupFactory = $eavSetupFactory;
     }
     
@@ -83,6 +90,11 @@ class InstallData implements InstallDataInterface
                 ]
             );
         } else {
+            $this->logger->critical(
+                'Attribute: '
+                . self::PRODUCT_LIST_ATTRIBUTE
+                . ' already exists in the database.'
+            );
             throw new AlreadyExistsException();
         }
     }
