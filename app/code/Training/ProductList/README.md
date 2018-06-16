@@ -84,3 +84,8 @@ the chosen way.
 The Layout of the blocks are defined in the productlist_index_index.xml file in 
 the view/layout directory. A custom stylesheet has also been added for the slider,
 along with external CDN links to the Slick javascript library and css. 
+
+### Unit Tests
+
+Unit Tests have been added in the Training/ProductList/Test/Unit directory for
+each php class. 
