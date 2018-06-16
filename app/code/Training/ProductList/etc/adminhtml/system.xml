@@ -13,10 +13,12 @@
                 <field id="productListName" translate="label" type="text"
                        sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>List Name</label>
+                    <validate>required-entry</validate>
                 </field>
                 <field id="numberOfProductToList" translate="label" type="text"
                        sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Maximum Number of Products to List</label>
+                    <validate>required-entry validate-digits</validate>
                 </field>
                 <field id="slider" translate="label" type="select"
                        sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
