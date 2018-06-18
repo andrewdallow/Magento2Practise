@@ -8,8 +8,8 @@
     <body>
         <referenceContainer name="content">
             <block name="blog_create"
-                   class="Ecommistry\Blog\Block\Blog\EditWithTopics"
-                   template="editWithTopics.phtml"/>
+                   class="Ecommistry\Blog\Block\Blog\Edit"
+                   template="edit.phtml"/>
         </referenceContainer>
     </body>
 </page>

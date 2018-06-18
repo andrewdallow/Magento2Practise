@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes>
+    <route url="V1/blog/:id" method="GET">
+        <service class="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                 method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/blog" method="GET">
+        <service class="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                 method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/blog" method="POST">
+        <service class="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                 method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/blog" method="PUT">
+        <service class="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                 method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/blog" method="DELETE">
+        <service class="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                 method="delete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/blog/:id" method="DELETE">
+        <service class="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                 method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>

@@ -2,7 +2,7 @@
 
 namespace Ecommistry\Blog\Model;
 
-use Ecommistry\Blog\Model\Api\Data\TopicInterface;
+use Ecommistry\Blog\Api\Data\TopicInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 

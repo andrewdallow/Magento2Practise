@@ -4,6 +4,8 @@ namespace Ecommistry\Blog\Block\Blog;
 
 use Ecommistry\Blog\Model\BlogFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory as TopicCollectionFactory;
+
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template;
 
@@ -29,8 +31,11 @@ class Edit extends Template implements IdentityInterface
     public function __construct(
         Template\Context $context,
         BlogFactory $blogFactory,
-        BlogResourceFactory $blogResourceFactory
+        BlogResourceFactory $blogResourceFactory,
+        TopicCollectionFactory $topicCollectionFactory
+
     ) {
+        $this->topicsFactory = $topicCollectionFactory;
         $this->blogFactory = $blogFactory;
         $this->blogResourceFactory = $blogResourceFactory;
         parent::__construct($context);
@@ -60,6 +65,11 @@ class Edit extends Template implements IdentityInterface
             return '/blog/index/edit?id=' . $this->getRequest()->getParam('id');
         }
         return '/blog/index/edit';
+    }
+    
+    public function getTopics()
+    {
+        return $this->topicsFactory->create()->getItems();
     }
     
     /**

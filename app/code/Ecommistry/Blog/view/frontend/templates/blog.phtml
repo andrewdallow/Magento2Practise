@@ -31,10 +31,15 @@ $collection = $block->getPosts();
                     ><?php echo $post->getTitle(); ?>
                     </a>
                 </h3>
+                <h4>
+                    Topic: <?php echo $block->getTopicById($post->getTopicId())
+                        ->getTitle(); ?></h4>
                 <p class="post-date">
                     <?php echo $post->getCreationTime(); ?>
                     <a href="/blog/index/delete?id=<?php echo $post->getId(); ?>">delete?</a>
                 </p>
+                <p>Last
+                    Edit: <?php echo $post->getUpdatedTime(); ?> </p>
                 <p class="post-content"><?php echo $post->getContent(); ?></p>
             </div>
         <?php endforeach; ?>

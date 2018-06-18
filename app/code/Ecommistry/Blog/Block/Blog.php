@@ -3,6 +3,7 @@
 namespace Ecommistry\Blog\Block;
 
 use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory;
+use Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory as TopicCollectionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template;
@@ -33,8 +34,10 @@ class Blog extends Template implements IdentityInterface
     public function __construct(
         Template\Context $context,
         CollectionFactory $blogFactory,
-        ScopeConfigInterface $config
+        ScopeConfigInterface $config,
+        TopicCollectionFactory $topicCollectionFactory
     ) {
+        $this->topicCollectionFactory = $topicCollectionFactory;
         $this->config = $config;
         $this->blogFactory = $blogFactory;
         parent::__construct($context);
@@ -55,6 +58,11 @@ class Blog extends Template implements IdentityInterface
             ->setPageSize($numberOfPostsToShow)
             ->load();
         return $collection->getItems();
+    }
+    
+    public function getTopicById($id)
+    {
+        return $this->topicCollectionFactory->create()->getItemById($id);
     }
     
     /**

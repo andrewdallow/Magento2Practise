@@ -2,8 +2,8 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
-use Ecommistry\Blog\Model\BlogWithTopic;
-use Ecommistry\Blog\Model\BlogWithTopicFactory;
+use Ecommistry\Blog\Model\Blog;
+use Ecommistry\Blog\Model\BlogFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
@@ -26,7 +26,7 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Edit extends Action
 {
-    /** @var \Ecommistry\Blog\Model\BlogWithTopicFactory */
+    /** @var \Ecommistry\Blog\Model\BlogFactory */
     private $blogFactory;
     /** @var \Ecommistry\Blog\Model\ResourceModel\BlogFactory */
     private $blogResourceFactory;
@@ -35,7 +35,7 @@ class Edit extends Action
     
     public function __construct(
         Context $context,
-        BlogWithTopicFactory $blogFactory,
+        BlogFactory $blogFactory,
         BlogResourceFactory $blogResourceFactory,
         Session $session
     ) {
@@ -78,9 +78,9 @@ class Edit extends Action
     /**
      * @param string $id
      *
-     * @return \Ecommistry\Blog\Model\BlogWithTopic
+     * @return \Ecommistry\Blog\Model\Blog
      */
-    private function getBlogById(string $id): BlogWithTopic
+    private function getBlogById(string $id): Blog
     {
         $blog = $this->blogFactory->create();
         $this->blogResourceFactory->create()->load($blog, $id, 'blog_id');
@@ -88,12 +88,12 @@ class Edit extends Action
     }
     
     /**
-     * @param \Ecommistry\Blog\Model\BlogWithTopic $blog
-     * @param array                                $post
+     * @param \Ecommistry\Blog\Model\Blog $blog
+     * @param array                       $post
      *
      * @throws \Exception
      */
-    private function updateBlog(BlogWithTopic $blog, array $post)
+    private function updateBlog(Blog $blog, array $post)
     {
         $blog->setTitle($post['title']);
         $blog->setContent($post['content']);

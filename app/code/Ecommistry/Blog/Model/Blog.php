@@ -2,10 +2,6 @@
 
 namespace Ecommistry\Blog\Model;
 
-use Ecommistry\Blog\Model\Api\Data\BlogInterface;
-use Magento\Framework\DataObject\IdentityInterface;
-use Magento\Framework\Model\AbstractModel;
-
 /**
  * Blog Model
  *
@@ -20,7 +16,7 @@ use Magento\Framework\Model\AbstractModel;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-class Blog extends AbstractModel implements IdentityInterface, BlogInterface
+class Blog extends AbstractBlog
 {
     const CACHE_TAG = 'ecommistry_blog';
     protected $_cacheTag = 'ecommistry_blog';
@@ -74,6 +70,35 @@ class Blog extends AbstractModel implements IdentityInterface, BlogInterface
     public function setCreationTime()
     {
         $this->setData('creation_time', date('d-m-Y h:i:s a'));
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getTopicId()
+    {
+        return $this->getData('topic_id');
+    }
+    
+    /**
+     * @param $id
+     */
+    public function setTopicId($id)
+    {
+        $this->setData('topic_id', $id);
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getUpdatedTime()
+    {
+        return $this->getData('updated_time');
+    }
+    
+    public function setUpdatedTime()
+    {
+        $this->setData('updated_time', date('d-m-Y h:i:s a'));
     }
     
     /**

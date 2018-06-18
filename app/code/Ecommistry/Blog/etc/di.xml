@@ -8,4 +8,10 @@
             </argument>
         </arguments>
     </type>
+    <preference for="Ecommistry\Blog\Api\BlogRepositoryInterface"
+                type="Ecommistry\Blog\Model\ResourceModel\BlogRepository"/>
+    <preference for="Ecommistry\Blog\Api\Data\BlogInterface"
+                type="Ecommistry\Blog\Model\Blog"/>
+    <preference for="Ecommistry\Blog\Api\Data\BlogSearchResultInterface"
+                type="Ecommistry\Blog\Model\BlogSearchResult"/>
 </config>

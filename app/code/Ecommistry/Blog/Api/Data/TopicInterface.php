@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Ecommistry\Blog\Model\Api\Data;
+namespace Ecommistry\Blog\Api\Data;
 
 /**
  * Topic Interface
