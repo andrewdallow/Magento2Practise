@@ -9,9 +9,15 @@
         </arguments>
     </type>
     <preference for="Ecommistry\Blog\Api\BlogRepositoryInterface"
-                type="Ecommistry\Blog\Model\ResourceModel\BlogRepository"/>
+                type="Ecommistry\Blog\Model\BlogRepository"/>
     <preference for="Ecommistry\Blog\Api\Data\BlogInterface"
                 type="Ecommistry\Blog\Model\Blog"/>
     <preference for="Ecommistry\Blog\Api\Data\BlogSearchResultInterface"
                 type="Ecommistry\Blog\Model\BlogSearchResult"/>
+    <preference for="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                type="Ecommistry\Blog\Model\TopicRepository"/>
+    <preference for="Ecommistry\Blog\Api\Data\TopicInterface"
+                type="Ecommistry\Blog\Model\Topic"/>
+    <preference for="Ecommistry\Blog\Api\Data\TopicSearchResultInterface"
+                type="Ecommistry\Blog\Model\TopicSearchResult"/>
 </config>

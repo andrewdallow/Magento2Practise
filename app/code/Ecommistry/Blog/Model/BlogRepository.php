@@ -1,11 +1,10 @@
 <?php
 
-namespace Ecommistry\Blog\Model\ResourceModel;
+namespace Ecommistry\Blog\Model;
 
 use Ecommistry\Blog\Api\BlogRepositoryInterface;
 use Ecommistry\Blog\Api\Data\BlogInterface;
 use Ecommistry\Blog\Api\Data\BlogSearchResultInterfaceFactory;
-use Ecommistry\Blog\Model\BlogFactory;
 use Ecommistry\Blog\Model\ResourceModel\Blog\Collection;
 use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
@@ -17,7 +16,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 /**
  * Class BlogRepository
  *
- * Long description for Class (if any)...
+ * Implementation of blog repository for CRUD operations.
  *
  * @category   Ecommistry
  * @package    Ecommistry_Blog
@@ -49,18 +48,18 @@ class BlogRepository implements BlogRepositoryInterface
         $this->collectionFactory = $collectionFactory;
         $this->searchResultFactory = $searchResultFactory;
     }
-    
-    
     /**
      * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
      *
-     * @return \Ecommistry\Blog\Api\Data\BlogInterface|void
+     * @return \Ecommistry\Blog\Api\Data\BlogInterface
      * @throws \Magento\Framework\Exception\AlreadyExistsException
      */
     public function save(BlogInterface $blog)
     {
         $blogResource = $this->blogReourceFactory->create();
         $blogResource->save($blog);
+    
+        return $blog;
     }
     
     /**
@@ -77,13 +76,11 @@ class BlogRepository implements BlogRepositoryInterface
         $blogResource->load($blog, $id);
         if (!$blog->getId()) {
             throw new NoSuchEntityException(__(
-                'Unable to find hamburger with ID "%1"',
-                $id
+                "Unable to find blog with ID '$id'"
             ));
         }
         return $blog;
     }
-    
     
     /**
      * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
@@ -129,6 +126,10 @@ class BlogRepository implements BlogRepositoryInterface
         return $this->buildSearchResult($searchCriteria, $collection);
     }
     
+    /**
+     * @param \Magento\Framework\Api\SearchCriteriaInterface       $searchCriteria
+     * @param \Ecommistry\Blog\Model\ResourceModel\Blog\Collection $collection
+     */
     private function addFiltersToCollection(
         SearchCriteriaInterface $searchCriteria,
         Collection $collection
@@ -144,6 +145,10 @@ class BlogRepository implements BlogRepositoryInterface
         }
     }
     
+    /**
+     * @param \Magento\Framework\Api\SearchCriteriaInterface       $searchCriteria
+     * @param \Ecommistry\Blog\Model\ResourceModel\Blog\Collection $collection
+     */
     private function addSortOrdersToCollection(
         SearchCriteriaInterface $searchCriteria,
         Collection $collection
@@ -155,6 +160,10 @@ class BlogRepository implements BlogRepositoryInterface
         }
     }
     
+    /**
+     * @param \Magento\Framework\Api\SearchCriteriaInterface       $searchCriteria
+     * @param \Ecommistry\Blog\Model\ResourceModel\Blog\Collection $collection
+     */
     private function addPagingToCollection(
         SearchCriteriaInterface $searchCriteria,
         Collection $collection
@@ -163,6 +172,12 @@ class BlogRepository implements BlogRepositoryInterface
         $collection->setCurPage($searchCriteria->getCurrentPage());
     }
     
+    /**
+     * @param \Magento\Framework\Api\SearchCriteriaInterface       $searchCriteria
+     * @param \Ecommistry\Blog\Model\ResourceModel\Blog\Collection $collection
+     *
+     * @return \Ecommistry\Blog\Api\Data\BlogSearchResultInterface
+     */
     private function buildSearchResult(
         SearchCriteriaInterface $searchCriteria,
         Collection $collection

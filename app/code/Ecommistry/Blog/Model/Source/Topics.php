@@ -2,7 +2,10 @@
 
 namespace Ecommistry\Blog\Model\Source;
 
+use Ecommistry\Blog\Api\TopicRepositoryInterface;
 use Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory;
+
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Option\ArrayInterface;
 
 /**
@@ -20,12 +23,17 @@ use Magento\Framework\Option\ArrayInterface;
  */
 class Topics implements ArrayInterface
 {
-    private $topicCollection;
+    /** @var \Ecommistry\Blog\Api\TopicRepositoryInterface */
+    private $topicRepository;
+    /** @var \Magento\Framework\Api\SearchCriteriaBuilder */
+    private $searchCriteriaBuilder;
     
     public function __construct(
-        CollectionFactory $collectionFactory
+        TopicRepositoryInterface $topicRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
-        $this->topicCollection = $collectionFactory->create();
+        $this->topicRepository = $topicRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
     
     /**
@@ -36,7 +44,11 @@ class Topics implements ArrayInterface
     public function toOptionArray()
     {
         $topics = [];
-        $topicCollection = $this->topicCollection->getItems();
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $topicCollection = $this->topicRepository
+            ->getList($searchCriteria)
+            ->getItems();
+        
         foreach ($topicCollection as $topic) {
             $topics[] = [
                 'value' => $topic->getId(),

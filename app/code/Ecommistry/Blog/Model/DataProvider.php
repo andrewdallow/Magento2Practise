@@ -17,7 +17,7 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
  */
 class DataProvider extends AbstractDataProvider
 {
-    protected $loadedData;
+    private $loadedData;
     
     public function __construct(
         string $name,
@@ -48,5 +48,4 @@ class DataProvider extends AbstractDataProvider
         }
         return $this->loadedData;
     }
-    
 }

@@ -24,7 +24,7 @@ class BlogActions extends Column
 {
     private const URL_PATH_EDIT = 'blog/index/edit';
     private const URL_PATH_DELETE = 'blog/index/delete';
-    protected $urlBuilder;
+    private $urlBuilder;
     
     /**
      * BlogActions constructor.

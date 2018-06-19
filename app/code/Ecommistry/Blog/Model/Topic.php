@@ -9,9 +9,8 @@ use Magento\Framework\Model\AbstractModel;
 /**
  * Model for a Topic
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -20,12 +19,12 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Topic extends AbstractModel implements TopicInterface, IdentityInterface
 {
-    const CACHE_TAG = 'ecommistry_topic';
-    protected $_cacheTag = 'ecommistry_topic';
-    protected $_eventPrefix = 'ecommistry_topic';
+    public const CACHE_TAG = 'ecommistry_topic';
     
     protected function _construct()
     {
+        $this->_cacheTag = 'ecommistry_topic';
+        $this->_eventPrefix = 'ecommistry_topic';
         $this->_init(ResourceModel\Topic::class);
     }
     
@@ -39,7 +38,9 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
     
-    
+    /**
+     * @return string
+     */
     public function getTitle()
     {
         return $this->getData('title');
@@ -48,24 +49,24 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
     /**
      * @param string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle($title)
     {
-        // TODO: Implement setTitle() method.
+        $this->setData('title', $title);
     }
     
     /**
      * @return null|string
      */
-    public function getDescription(): ?string
+    public function getDescription()
     {
-        // TODO: Implement getDescription() method.
+        return $this->getData('description');
     }
     
     /**
      * @param string $description
      */
-    public function setDescription(string $description): void
+    public function setDescription($description)
     {
-        // TODO: Implement setDescription() method.
+        $this->setData('description', $description);
     }
 }

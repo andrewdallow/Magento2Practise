@@ -2,10 +2,9 @@
 
 namespace Ecommistry\Blog\Controller\Adminhtml\Index;
 
-use Ecommistry\Blog\Model\BlogFactory;
-use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Ecommistry\Blog\Api\BlogRepositoryInterface;
+
 use Magento\Backend\App\Action;
-use Magento\Framework\App\ResponseInterface;
 use \Magento\Backend\App\Action\Context;
 
 /**
@@ -23,37 +22,26 @@ use \Magento\Backend\App\Action\Context;
  */
 class Delete extends Action
 {
-    private $blogFactory;
-    private $resourceFactory;
+    /** @var \Ecommistry\Blog\Api\BlogRepositoryInterface */
+    private $blogRepository;
     
     public function __construct(
         Context $context,
-        BlogFactory $blogFactory,
-        BlogResourceFactory $resourceFactory
+        BlogRepositoryInterface $blogRepository
     ) {
-        $this->blogFactory = $blogFactory;
-        $this->resourceFactory = $resourceFactory;
+        $this->blogRepository = $blogRepository;
         parent::__construct($context);
     }
     
     /**
-     * Execute action based on request and return result
-     *
-     * Note: Request will be added as operation argument in future
-     *
-     * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
+     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
         $blogId = $this->getRequest()->getParam('id');
-        
         if ($blogId) {
             try {
-                $blog = $this->blogFactory->create();
-                $this->resourceFactory->create()
-                    ->load($blog, $blogId, 'blog_id');
-                $this->resourceFactory->create()->delete($blog);
+                $this->blogRepository->deleteById($blogId);
                 $this->messageManager->addSuccessMessage('Blog Post Deleted');
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());

@@ -11,9 +11,8 @@ use Magento\Framework\Controller\ResultFactory;
 /**
  * Index Controller
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -53,6 +52,4 @@ class Index extends Action
         }
         return $result;
     }
-    
-    
 }

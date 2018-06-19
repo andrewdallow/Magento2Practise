@@ -27,19 +27,25 @@ $post = $block->getBlogPost();
     <form action="" method="post">
         <label for="title">Blog Title: </label>
         <input name="title" id="title" type="text"
-               value="<?php echo $post->getTitle(); ?>"/>
+               value="<?php echo($post ? $post->getTitle() : ''); ?>"/>
         <label for="topic">Topic: </label>
-        <select name="topic" id="topic">
+        <select name="topic_id" id="topic">
             <?php foreach ($block->getTopics() as $topic) : ?>
-                <?php $selected = $topic->getId() === $post->getTopicId()
-                    ? ' selected' : ''; ?>
+                <?php
+                $selected = '';
+                if ($post) {
+                    $selected = $topic->getId() === $post->getTopicId()
+                        ? ' selected' : '';
+                }
+                ?>
                 <option value="<?php echo $topic->getId(); ?>"
                     <?php echo $selected; ?>
                 ><?php echo $topic->getTitle(); ?></option>
             <?php endforeach; ?>
         </select>
         <label for="content">Content: </label>
-        <textarea name="content" id="content"><?php echo $post->getContent();
+        <textarea name="content"
+                  id="content"><?php echo($post ? $post->getContent() : '');
             ?></textarea>
         <input type="submit" name="submit" value="Submit">
     </form>

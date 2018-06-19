@@ -18,12 +18,12 @@ namespace Ecommistry\Blog\Model;
  */
 class Blog extends AbstractBlog
 {
-    const CACHE_TAG = 'ecommistry_blog';
-    protected $_cacheTag = 'ecommistry_blog';
-    protected $_eventPrefix = 'ecommistry_blog';
+    public const CACHE_TAG = 'ecommistry_blog';
     
     protected function _construct()
     {
+        $this->_cacheTag = 'ecommistry_blog';
+        $this->_eventPrefix = 'ecommistry_blog';
         $this->_init(ResourceModel\Blog::class);
     }
     
@@ -96,6 +96,7 @@ class Blog extends AbstractBlog
         return $this->getData('updated_time');
     }
     
+    
     public function setUpdatedTime()
     {
         $this->setData('updated_time', date('d-m-Y h:i:s a'));
@@ -110,5 +111,4 @@ class Blog extends AbstractBlog
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
-    
 }

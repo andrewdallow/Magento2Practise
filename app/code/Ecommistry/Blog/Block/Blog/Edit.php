@@ -2,21 +2,22 @@
 
 namespace Ecommistry\Blog\Block\Blog;
 
-use Ecommistry\Blog\Model\BlogFactory;
-use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
-use Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory as TopicCollectionFactory;
+use Ecommistry\Blog\Api\BlogRepositoryInterface;
+use Ecommistry\Blog\Api\TopicRepositoryInterface;
 
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\Message\ManagerInterface;
 
 /**
  * Edit Block
  *
  * Handles the display of the page for editing a single blog post.
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -25,35 +26,44 @@ use Magento\Framework\View\Element\Template;
  */
 class Edit extends Template implements IdentityInterface
 {
-    private $blogFactory;
-    private $blogResourceFactory;
+    /** @var \Ecommistry\Blog\Api\BlogRepositoryInterface */
+    private $blogRepository;
+    /** @var \Ecommistry\Blog\Api\TopicRepositoryInterface */
+    private $topicRepository;
+    /** @var \Magento\Framework\Api\SearchCriteriaBuilder */
+    private $searchCriteriaBuilder;
+    /** @var \Magento\Framework\Message\ManagerInterface */
+    private $messageManager;
     
     public function __construct(
         Template\Context $context,
-        BlogFactory $blogFactory,
-        BlogResourceFactory $blogResourceFactory,
-        TopicCollectionFactory $topicCollectionFactory
-
+        BlogRepositoryInterface $blogRepository,
+        TopicRepositoryInterface $topicRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        ManagerInterface $messageManager
     ) {
-        $this->topicsFactory = $topicCollectionFactory;
-        $this->blogFactory = $blogFactory;
-        $this->blogResourceFactory = $blogResourceFactory;
+        $this->topicRepository = $topicRepository;
+        $this->blogRepository = $blogRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         parent::__construct($context);
+        $this->messageManager = $messageManager;
     }
     
     /**
      * Get the post specified by the id param.
      *
-     * @return \Ecommistry\Blog\Model\Blog
+     * @return \Ecommistry\Blog\Api\Data\BlogInterface
      */
     public function getBlogPost()
     {
-        $blog = $this->blogFactory->create();
-        $blogId = $this->getRequest()->getParam('id');
-        $this->blogResourceFactory->create()
-            ->load($blog, $blogId, 'blog_id');
-        
-        return $blog;
+        $blogId = $this->getRequest()->getParam('blog_id');
+        if ($blogId) {
+            try {
+                return $this->blogRepository->getById($blogId);
+            } catch (NoSuchEntityException $exception) {
+                $this->messageManager->addErrorMessage($exception->getMessage());
+            }
+        }
     }
     
     /**
@@ -61,15 +71,21 @@ class Edit extends Template implements IdentityInterface
      */
     public function getFormAction()
     {
-        if ($this->getRequest()->getParam('id')) {
-            return '/blog/index/edit?id=' . $this->getRequest()->getParam('id');
+        if ($this->getRequest()->getParam('blog_id')) {
+            return '/blog/index/edit?id=' . $this->getRequest()
+                    ->getParam('blog_id');
         }
         return '/blog/index/edit';
     }
     
+    /**
+     * @return \Ecommistry\Blog\Api\Data\TopicInterface[]
+     */
     public function getTopics()
     {
-        return $this->topicsFactory->create()->getItems();
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $searchResult = $this->topicRepository->getList($searchCriteria);
+        return $searchResult->getItems();
     }
     
     /**
@@ -79,6 +95,11 @@ class Edit extends Template implements IdentityInterface
      */
     public function getIdentities()
     {
-        return $this->getBlogPost()->getIdentities();
+        $identities = [];
+        $blogPost = $this->getBlogPost();
+        if ($blogPost) {
+            $identities = $this->getBlogPost()->getIdentities();
+        }
+        return $identities;
     }
 }

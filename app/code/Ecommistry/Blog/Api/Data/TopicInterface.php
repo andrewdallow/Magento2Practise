@@ -6,9 +6,8 @@ namespace Ecommistry\Blog\Api\Data;
 /**
  * Topic Interface
  *
- * @category   Zend
- * @package    Zend_${Package}
- * @subpackage ${Subpackage}
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -18,32 +17,38 @@ namespace Ecommistry\Blog\Api\Data;
 interface TopicInterface
 {
     /**
-     * @return mixed
+     * @return int
      */
     public function getId();
     
     /**
-     * @param mixed $id
+     * @param int $id
+     *
+     * @return void
      */
     public function setId($id);
     
     /**
-     * @return mixed
+     * @return string
      */
     public function getTitle();
     
     /**
      * @param string $title
+     *
+     * @return void
      */
-    public function setTitle(string $title): void;
+    public function setTitle($title);
     
     /**
-     * @return null|string
+     * @return string
      */
-    public function getDescription(): ?string;
+    public function getDescription();
     
     /**
      * @param string $description
+     *
+     * @return void
      */
-    public function setDescription(string $description): void;
+    public function setDescription($description);
 }

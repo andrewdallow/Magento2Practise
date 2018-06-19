@@ -2,6 +2,7 @@
 
 namespace Ecommistry\Blog\Controller\Adminhtml\Index;
 
+use Ecommistry\Blog\Api\BlogRepositoryInterface;
 use Ecommistry\Blog\Model\BlogFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
 use Magento\Backend\App\Action;
@@ -25,15 +26,15 @@ class Save extends Action
 {
     
     private $blogFactory;
-    private $blogResourceFactory;
+    private $blogRepository;
     
     public function __construct(
         Context $context,
         BlogFactory $itemFactory,
-        BlogResourceFactory $blogResourceFactory
+        BlogRepositoryInterface $blogRepository
     ) {
         $this->blogFactory = $itemFactory;
-        $this->blogResourceFactory = $blogResourceFactory;
+        $this->blogRepository = $blogRepository;
         parent::__construct($context);
     }
     
@@ -50,7 +51,7 @@ class Save extends Action
         try {
             $blog = $this->blogFactory->create()
                 ->setData($this->getRequest()->getPostValue());
-            $this->blogResourceFactory->create()->save($blog);
+            $this->blogRepository->save($blog);
             $this->messageManager->addSuccessMessage('Blog Post Saved');
         } catch (\Exception $exception) {
             $this->messageManager->addErrorMessage('Something went wrong');

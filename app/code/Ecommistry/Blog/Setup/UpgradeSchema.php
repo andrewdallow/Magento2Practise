@@ -12,9 +12,8 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
  *
  * Allows Blogs to contain topics and track when they were last updated.
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -47,7 +46,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
                     'identity' => true,
                     'nullable' => false,
                     'primary'  => true,
-                    'unsigned' => true
+                    'unsigned' => true,
+                    'default'  => 1
                 ],
                 'Topic ID'
             )->addColumn(

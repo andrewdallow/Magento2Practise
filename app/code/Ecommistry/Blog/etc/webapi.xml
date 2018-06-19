@@ -42,4 +42,47 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route url="V1/topic/:id" method="GET">
+        <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                 method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/topic" method="GET">
+        <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                 method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/topic" method="POST">
+        <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                 method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/topic" method="PUT">
+        <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                 method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/topic" method="DELETE">
+        <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                 method="delete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="V1/topic/:id" method="DELETE">
+        <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
+                 method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 </routes>

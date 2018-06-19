@@ -2,9 +2,10 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
-use Ecommistry\Blog\Model\Blog;
-use Ecommistry\Blog\Model\BlogFactory;
-use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Ecommistry\Blog\Api\BlogRepositoryInterface;
+use Ecommistry\Blog\Api\Data\BlogInterface;
+
+use Ecommistry\Blog\Setup\InstallSchema;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -15,9 +16,8 @@ use Magento\Framework\Controller\ResultFactory;
  *
  * Edit a blog post in the database.
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -26,22 +26,18 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Edit extends Action
 {
-    /** @var \Ecommistry\Blog\Model\BlogFactory */
-    private $blogFactory;
-    /** @var \Ecommistry\Blog\Model\ResourceModel\BlogFactory */
-    private $blogResourceFactory;
+    /** @var \Ecommistry\Blog\Api\BlogRepositoryInterface */
+    private $blogRepository;
     /** @var \Magento\Customer\Model\Session */
     private $session;
     
     public function __construct(
         Context $context,
-        BlogFactory $blogFactory,
-        BlogResourceFactory $blogResourceFactory,
+        BlogRepositoryInterface $blogRepository,
         Session $session
     ) {
         $this->session = $session;
-        $this->blogFactory = $blogFactory;
-        $this->blogResourceFactory = $blogResourceFactory;
+        $this->blogRepository = $blogRepository;
         parent::__construct($context);
     }
     
@@ -70,38 +66,34 @@ class Edit extends Action
         $post = (array)$this->getRequest()->getParams();
         
         if (isset($post['submit'])) {
-            $blog = $this->getBlogById($post['id']);
-            $this->updateBlog($blog, $post);
+            $blog
+                = $this->getBlogById((int)$post[InstallSchema::ID_FIELD_NAME]);
+            $this->updateBlog($blog);
         }
     }
     
     /**
-     * @param string $id
+     * @param int $id
      *
-     * @return \Ecommistry\Blog\Model\Blog
+     * @return \Ecommistry\Blog\Api\Data\BlogInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    private function getBlogById(string $id): Blog
+    private function getBlogById(int $id): BlogInterface
     {
-        $blog = $this->blogFactory->create();
-        $this->blogResourceFactory->create()->load($blog, $id, 'blog_id');
-        return $blog;
+        return $this->blogRepository->getById($id);
     }
     
     /**
-     * @param \Ecommistry\Blog\Model\Blog $blog
-     * @param array                       $post
-     *
-     * @throws \Exception
+     * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
+     * @param array                                   $post
      */
-    private function updateBlog(Blog $blog, array $post)
+    private function updateBlog(BlogInterface $blog)
     {
-        $blog->setTitle($post['title']);
-        $blog->setContent($post['content']);
-        $blog->setTopicId($post['topic']);
+        $blog->setData($this->getRequest()->getParams());
         $blog->setUpdatedTime();
         
         try {
-            $this->blogResourceFactory->create()->save($blog);
+            $this->blogRepository->save($blog);
             $this->messageManager->addSuccessMessage('Blog Post Updated');
         } catch (\Exception $alreadyExistsException) {
             $this->messageManager->addErrorMessage('Something went wrong');

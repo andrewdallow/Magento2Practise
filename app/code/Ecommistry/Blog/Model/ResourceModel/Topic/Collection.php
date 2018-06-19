@@ -9,9 +9,8 @@ use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 /**
  * Collection of Topics
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -20,10 +19,9 @@ use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
  */
 class Collection extends AbstractCollection
 {
-    protected $_idFieldName = 'topic_id';
-    
     protected function _construct()
     {
+        $this->_idFieldName = 'topic_id';
         $this->_init(Topic::class, TopicResource::class);
     }
 }

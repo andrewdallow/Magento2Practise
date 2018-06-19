@@ -2,13 +2,13 @@
 
 namespace Ecommistry\Blog\Model;
 
-use Ecommistry\Blog\Api\Data\BlogInterface;
-use Magento\Framework\Model\AbstractModel;
+use Ecommistry\Blog\Api\Data\TopicSearchResultInterface;
+use Magento\Framework\Api\SearchResults;
 
 /**
- * Class BlogAbstract
+ * Class TopicSearchResult
  *
- * Long description for Class (if any)...
+ * Used to set the return types of funtions in interface.
  *
  * @category   Ecommistry
  * @package    Ecommistry_Blog
@@ -18,8 +18,8 @@ use Magento\Framework\Model\AbstractModel;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-abstract class AbstractBlog extends AbstractModel implements
-    BlogInterface
+class TopicSearchResult extends SearchResults implements
+    TopicSearchResultInterface
 {
-    
+
 }

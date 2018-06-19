@@ -2,23 +2,24 @@
 
 namespace Ecommistry\Blog\Controller\Index;
 
+use Ecommistry\Blog\Api\BlogRepositoryInterface;
 use Ecommistry\Blog\Model\Blog;
 use Ecommistry\Blog\Model\BlogFactory;
-use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
+use Ecommistry\Blog\Setup\InstallSchema;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception\AlreadyExistsException;
 
 /**
  * Create Controller
  *
  * Create a blog entry in the database from POST data.
  *
- * @category   Zend
- * @package    Zend_Ecommistry
- * @subpackage Blog
+ * @category   Ecommistry
+ * @package    Ecommistry_Blog
  * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
  * @license    http://framework.zend.com/license   BSD License
  * @version    Release: 1.0
@@ -29,20 +30,20 @@ class Create extends Action
 {
     /** @var \Ecommistry\Blog\Model\BlogFactory */
     private $blogFactory;
-    /** @var \Ecommistry\Blog\Model\ResourceModel\BlogFactory */
-    private $blogResourceFactory;
+    /** @var \Ecommistry\Blog\Api\BlogRepositoryInterface */
+    private $blogRepository;
     /** @var \Magento\Customer\Model\Session */
     private $session;
     
     public function __construct(
         Context $context,
         BlogFactory $blogFactory,
-        BlogResourceFactory $blogResourceFactory,
+        BlogRepositoryInterface $blogRepository,
         Session $session
     ) {
         $this->session = $session;
+        $this->blogRepository = $blogRepository;
         $this->blogFactory = $blogFactory;
-        $this->blogResourceFactory = $blogResourceFactory;
         parent::__construct($context);
     }
     
@@ -64,25 +65,21 @@ class Create extends Action
             $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
             $this->createNewBlogIfPost();
         }
-    
+        
         return $result;
     }
     
     private function createNewBlogIfPost(): void
     {
-        if (!$this->session->isLoggedIn()) {
-            $result
-                = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-            $result->setPath('*/*/message');
-        } else {
-            $result = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-        }
         $post = (array)$this->getRequest()->getParams();
         
         if (isset($post['submit'])) {
             $blog = $this->getBlog($post);
             $this->saveBlog($blog);
-            $this->_redirect('blog/index/edit?id=' . $blog->getId());
+            $this->_redirect(
+                'blog/index/edit',
+                [InstallSchema::ID_FIELD_NAME => $blog->getId()]
+            );
         }
     }
     
@@ -94,12 +91,7 @@ class Create extends Action
     private function getBlog(array $post): Blog
     {
         $blog = $this->blogFactory->create();
-        $blog->setTitle($post['title']);
-        $blog->setContent($post['content']);
-        $blog->setTopicId($post['topic']);
-        $blog->setUpdatedTime();
-        $blog->setCreationTime();
-        
+        $blog->setData($post);
         return $blog;
     }
     
@@ -109,10 +101,10 @@ class Create extends Action
     private function saveBlog(Blog $blog): void
     {
         try {
-            $this->blogResourceFactory->create()->save($blog);
+            $this->blogRepository->save($blog);
             $this->messageManager->addSuccessMessage('Blog Post Added');
-        } catch (\Exception $alreadyExistsException) {
-            $this->messageManager->addErrorMessage('Something went wrong');
+        } catch (AlreadyExistsException $exception) {
+            $this->messageManager->addErrorMessage($exception->getMessage());
         }
     }
 }

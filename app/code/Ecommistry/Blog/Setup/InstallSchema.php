@@ -8,9 +8,9 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
- * Short description for file
+ * Class InstallSchema
  *
- * Long description for file (if any)...
+ * Install script to install the ecommistry blog table
  *
  * @category   Zend
  * @package    Zend_Training
@@ -23,6 +23,7 @@ use Magento\Framework\Setup\SchemaSetupInterface;
  */
 class InstallSchema implements InstallSchemaInterface
 {
+    public const ID_FIELD_NAME = 'blog_id';
     public const BLOG_TABLE_NAME = 'ecommistry_blog';
     /**
      * @param \Magento\Framework\Setup\SchemaSetupInterface   $setup
@@ -41,7 +42,7 @@ class InstallSchema implements InstallSchemaInterface
         $table = $installer->getConnection()->newTable(
             $installer->getTable(self::BLOG_TABLE_NAME)
         )->addColumn(
-            'blog_id',
+            self::ID_FIELD_NAME,
             Table::TYPE_SMALLINT,
             null,
             [

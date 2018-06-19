@@ -44,8 +44,6 @@ class Collection extends SearchResult
         Logger $logger,
         FetchStrategy $fetchStrategy,
         EventManager $eventManager,
-        string $mainTable = InstallSchema::BLOG_TABLE_NAME,
-        ?string $resourceModel = Blog::class,
         ?string $identifierName = null,
         ?string $connectionName = null
     ) {
@@ -54,8 +52,8 @@ class Collection extends SearchResult
             $logger,
             $fetchStrategy,
             $eventManager,
-            $mainTable,
-            $resourceModel,
+            InstallSchema::BLOG_TABLE_NAME,
+            Blog::class,
             $identifierName,
             $connectionName
         );
