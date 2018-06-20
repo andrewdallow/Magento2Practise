@@ -6,7 +6,7 @@ The example also shows how to install a table for the blog with an install
 script, then later, Upgrade the existing table with an update_time column 
 and a column referencing the id of a topic. A new Topic table is also added. 
 
-### Update 1.0.2
+## Update 1.0.2
 Updated to use blog repository interface instead of Factories. 
 
 Added Product filtered product list at /blog/index/products which displays
