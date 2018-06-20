@@ -9,8 +9,8 @@ and a column referencing the id of a topic. A new Topic table is also added.
 ## Update 1.0.2
 Updated to use blog repository interface instead of Factories. 
 
-Added Product filtered product list at /blog/index/products which displays
-products with the following conditions:
+Added filtered product list using product repository on url /blog/index/products 
+which displays products with the following conditions:
 
         Filters: 'price' > 10.00 AND 'price' < 20.00 AND 'visibility' === 4 AND 'status' === 1
         Order By: 'price', 'desc'
