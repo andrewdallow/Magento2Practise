@@ -64,8 +64,9 @@ class Blog extends Template implements IdentityInterface
             self::XML_PATH_NUMBER_OF_POSTS_TO_SHOW
         );
     
-        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $searchCriteria = $this->searchCriteriaBuilder;
         $searchCriteria->setPageSize($numberOfPostsToShow);
+        $searchCriteria->create();
         $searchResult = $this->blogRepository->getList($searchCriteria);
     
         return $searchResult->getItems();
