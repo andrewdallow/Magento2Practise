@@ -1,6 +1,6 @@
 <?php
 /**
- * Products List
+ * Products List Template
  *
  * @category   Ecommistry
  * @package    Ecommistry_Blog
@@ -13,6 +13,7 @@
 
 /** @var \Ecommistry\Blog\Block\Products $block */
 
+/** @var \Magento\Catalog\Api\Data\ProductInterface[] $collection */
 $collection = $block->getLoadedProductCollection();
 ?>
 
@@ -25,7 +26,6 @@ $collection = $block->getLoadedProductCollection();
     <div class="blog-products-wrapper">
         <ul class="blog-products-list">
             <?php foreach ($collection as $product) : ?>
-                <?php /** @var \Magento\Catalog\Api\Data\ProductInterface $product */ ?>
                 <li class="blog-product"><a
                             href="<?php echo($product->getProductUrl()); ?>"><?php echo $product->getName(); ?></a>
                     Price: $<?php echo sprintf(

@@ -5,9 +5,9 @@ namespace Ecommistry\Blog\Block;
 use Magento\Framework\View\Element\Template;
 
 /**
- * Class Products
+ * Class Products Block
  *
- * Long description for Class (if any)...
+ * Show filtered products from products repository.
  *
  * @category   Ecommistry
  * @package    Ecommistry_Blog

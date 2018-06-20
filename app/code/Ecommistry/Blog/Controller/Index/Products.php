@@ -13,9 +13,9 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Class Products
+ * Class Products Controller
  *
- * Long description for Class (if any)...
+ * List Products from the products repository.
  *
  * @category   Ecommistry
  * @package    Ecommistry_Blog
