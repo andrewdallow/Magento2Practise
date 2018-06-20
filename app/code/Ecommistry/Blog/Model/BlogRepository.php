@@ -4,6 +4,7 @@ namespace Ecommistry\Blog\Model;
 
 use Ecommistry\Blog\Api\BlogRepositoryInterface;
 use Ecommistry\Blog\Api\Data\BlogInterface;
+use Ecommistry\Blog\Api\Data\BlogInterfaceFactory;
 use Ecommistry\Blog\Api\Data\BlogSearchResultInterfaceFactory;
 use Ecommistry\Blog\Model\ResourceModel\Blog\Collection;
 use Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory;
@@ -30,7 +31,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 class BlogRepository implements BlogRepositoryInterface
 {
-    /** @var \Ecommistry\Blog\Model\BlogFactory */
+    /** @var \Ecommistry\Blog\Model\BlogInterfaceFactory */
     private $blogFactory;
     /** @var \Ecommistry\Blog\Model\ResourceModel\BlogFactory */
     private $blogReourceFactory;
@@ -40,7 +41,7 @@ class BlogRepository implements BlogRepositoryInterface
     private $searchResultFactory;
     
     public function __construct(
-        BlogFactory $blogFactory,
+        BlogInterfaceFactory $blogFactory,
         BlogResourceFactory $blogResourceFactory,
         CollectionFactory $collectionFactory,
         BlogSearchResultInterfaceFactory $searchResultFactory

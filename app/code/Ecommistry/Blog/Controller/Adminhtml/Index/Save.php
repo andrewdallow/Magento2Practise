@@ -3,7 +3,7 @@
 namespace Ecommistry\Blog\Controller\Adminhtml\Index;
 
 use Ecommistry\Blog\Api\BlogRepositoryInterface;
-use Ecommistry\Blog\Model\BlogFactory;
+use Ecommistry\Blog\Api\Data\BlogInterfaceFactory;
 use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\ResponseInterface;
@@ -30,7 +30,7 @@ class Save extends Action
     
     public function __construct(
         Context $context,
-        BlogFactory $itemFactory,
+        BlogInterfaceFactory $itemFactory,
         BlogRepositoryInterface $blogRepository
     ) {
         $this->blogFactory = $itemFactory;

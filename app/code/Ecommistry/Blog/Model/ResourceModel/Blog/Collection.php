@@ -4,7 +4,8 @@ namespace Ecommistry\Blog\Model\ResourceModel\Blog;
 
 use Ecommistry\Blog\Model\Blog;
 use Ecommistry\Blog\Model\ResourceModel\Blog as BlogResource;
-use \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Ecommistry\Blog\Setup\InstallSchema;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 /**
  * Blog Collection
@@ -21,7 +22,7 @@ class Collection extends AbstractCollection
 {
     protected function _construct()
     {
-        $this->_idFieldName = 'blog_id';
+        $this->_idFieldName = InstallSchema::ID_FIELD_NAME;
         $this->_init(Blog::class, BlogResource::class);
     }
 }

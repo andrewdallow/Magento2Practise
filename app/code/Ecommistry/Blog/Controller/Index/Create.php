@@ -3,15 +3,17 @@
 namespace Ecommistry\Blog\Controller\Index;
 
 use Ecommistry\Blog\Api\BlogRepositoryInterface;
-use Ecommistry\Blog\Model\Blog;
-use Ecommistry\Blog\Model\BlogFactory;
+use Ecommistry\Blog\Api\Data\BlogInterface;
+use Ecommistry\Blog\Api\Data\BlogInterfaceFactory;
 use Ecommistry\Blog\Setup\InstallSchema;
+
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Session\SessionManagerInterface;
 
 /**
  * Create Controller
@@ -28,7 +30,7 @@ use Magento\Framework\Exception\AlreadyExistsException;
  */
 class Create extends Action
 {
-    /** @var \Ecommistry\Blog\Model\BlogFactory */
+    /** @var \Ecommistry\Blog\Model\BlogInterfaceFactory */
     private $blogFactory;
     /** @var \Ecommistry\Blog\Api\BlogRepositoryInterface */
     private $blogRepository;
@@ -37,7 +39,7 @@ class Create extends Action
     
     public function __construct(
         Context $context,
-        BlogFactory $blogFactory,
+        BlogInterfaceFactory $blogFactory,
         BlogRepositoryInterface $blogRepository,
         Session $session
     ) {
@@ -86,9 +88,9 @@ class Create extends Action
     /**
      * @param array $post
      *
-     * @return \Ecommistry\Blog\Model\Blog
+     * @return \Ecommistry\Blog\Api\Data\BlogInterface
      */
-    private function getBlog(array $post): Blog
+    private function getBlog(array $post): BlogInterface
     {
         $blog = $this->blogFactory->create();
         $blog->setData($post);
@@ -96,9 +98,11 @@ class Create extends Action
     }
     
     /**
-     * @param \Ecommistry\Blog\Model\Blog $blog
+     * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
+     *
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
-    private function saveBlog(Blog $blog): void
+    private function saveBlog(BlogInterface $blog): void
     {
         try {
             $this->blogRepository->save($blog);

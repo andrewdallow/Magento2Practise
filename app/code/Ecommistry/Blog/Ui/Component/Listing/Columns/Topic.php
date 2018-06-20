@@ -62,7 +62,7 @@ class Topic extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item[$this->getData('name')])) {
                     $id = $item[$this->getData('name')];
-                    /** @var \Ecommistry\Blog\Model\Topic $topic */
+                    /** @var \Ecommistry\Blog\Api\Data\TopicInterface $topic */
                     $topic = $this->topicFactory->getItemById($id);
                     $item[$this->getData('name')] = $topic->getTitle();
                 }

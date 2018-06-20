@@ -2,6 +2,9 @@
 
 namespace Ecommistry\Blog\Model;
 
+use Ecommistry\Blog\Api\Data\BlogInterface;
+use Magento\Framework\Model\AbstractModel;
+
 /**
  * Blog Model
  *
@@ -16,7 +19,8 @@ namespace Ecommistry\Blog\Model;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-class Blog extends AbstractBlog
+class Blog extends AbstractModel implements
+    BlogInterface
 {
     public const CACHE_TAG = 'ecommistry_blog';
     

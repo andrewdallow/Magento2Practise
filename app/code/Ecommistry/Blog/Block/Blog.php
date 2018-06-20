@@ -66,8 +66,8 @@ class Blog extends Template implements IdentityInterface
     
         $searchCriteria = $this->searchCriteriaBuilder;
         $searchCriteria->setPageSize($numberOfPostsToShow);
-        $searchCriteria->create();
-        $searchResult = $this->blogRepository->getList($searchCriteria);
+        $searchResult
+            = $this->blogRepository->getList($searchCriteria->create());
     
         return $searchResult->getItems();
     }
