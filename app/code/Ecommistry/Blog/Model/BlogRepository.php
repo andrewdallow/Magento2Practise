@@ -40,6 +40,14 @@ class BlogRepository implements BlogRepositoryInterface
     /** @var \Ecommistry\Blog\Api\Data\BlogSearchResultInterface */
     private $searchResultFactory;
     
+    /**
+     * BlogRepository constructor.
+     *
+     * @param \Ecommistry\Blog\Api\Data\BlogInterfaceFactory              $blogFactory
+     * @param \Ecommistry\Blog\Model\ResourceModel\BlogFactory            $blogResourceFactory
+     * @param \Ecommistry\Blog\Model\ResourceModel\Blog\CollectionFactory $collectionFactory
+     * @param \Ecommistry\Blog\Api\Data\BlogSearchResultInterfaceFactory  $searchResultFactory
+     */
     public function __construct(
         BlogInterfaceFactory $blogFactory,
         BlogResourceFactory $blogResourceFactory,
