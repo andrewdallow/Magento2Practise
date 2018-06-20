@@ -42,7 +42,7 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-
+    <!-- Topic Webapi -->
     <route url="V1/topic/:id" method="GET">
         <service class="Ecommistry\Blog\Api\TopicRepositoryInterface"
                  method="getById"/>

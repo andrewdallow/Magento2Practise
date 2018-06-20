@@ -9,13 +9,17 @@ and a column referencing the id of a topic. A new Topic table is also added.
 ## Update 1.0.2
 Updated to use blog repository interface instead of Factories. 
 
+The Blog repository interface has also been added to the Magento webapi using 
+the etc/webapi.xml file. API calls can be accessed through /rest/V1/blog and 
+include GET, PUT, POST, and DELETE calls. 
+
 Added filtered product list using product repository on url /blog/index/products 
 which displays products with the following conditions:
 
         Filters: 'price' > 10.00 AND 'price' < 20.00 AND 'visibility' === 4 AND 'status' === 1
         Order By: 'price', 'desc'
         Page Size: 6
-
+        
 ## Update 1.0.1
 
 ### System Configuration

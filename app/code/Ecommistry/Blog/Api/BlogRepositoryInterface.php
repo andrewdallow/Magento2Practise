@@ -24,7 +24,7 @@ interface BlogRepositoryInterface
      * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
      *
      * @return \Ecommistry\Blog\Api\Data\BlogInterface
-     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function save(BlogInterface $blog);
     
@@ -47,14 +47,17 @@ interface BlogRepositoryInterface
     /**
      * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
      *
-     * @return void
+     * @return bool|
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function delete(BlogInterface $blog);
     
     /**
      * @param int $id
      *
-     * @return void
+     * @return bool
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function deleteById(int $id);
 }

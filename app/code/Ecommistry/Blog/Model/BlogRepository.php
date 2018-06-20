@@ -11,6 +11,8 @@ use Ecommistry\Blog\Model\ResourceModel\BlogFactory as BlogResourceFactory;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SortOrder;
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
@@ -48,16 +50,21 @@ class BlogRepository implements BlogRepositoryInterface
         $this->collectionFactory = $collectionFactory;
         $this->searchResultFactory = $searchResultFactory;
     }
+    
     /**
      * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
      *
      * @return \Ecommistry\Blog\Api\Data\BlogInterface
-     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
      */
     public function save(BlogInterface $blog)
     {
         $blogResource = $this->blogReourceFactory->create();
-        $blogResource->save($blog);
+        try {
+            $blogResource->save($blog);
+        } catch (\Exception $exception) {
+            throw new CouldNotSaveException(__($exception->getMessage()));
+        }
     
         return $blog;
     }
@@ -86,26 +93,29 @@ class BlogRepository implements BlogRepositoryInterface
      * @param \Ecommistry\Blog\Api\Data\BlogInterface $blog
      *
      * @return bool|void
-     * @throws \Exception
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
      */
     public function delete(BlogInterface $blog)
     {
         $blogResource = $this->blogReourceFactory->create();
-        $blogResource->delete($blog);
+        try {
+            $blogResource->delete($blog);
+        } catch (\Exception $exception) {
+            throw new CouldNotDeleteException(__($exception->getMessage()));
+        }
+        return true;
     }
     
     /**
      * @param int $id
      *
-     * @throws \Exception
+     * @return bool|void
+     * @throws \Magento\Framework\Exception\CouldNotDeleteException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function deleteById(int $id)
     {
-        $blog = $this->blogFactory->create();
-        $blogResource = $this->blogReourceFactory->create();
-        
-        $blogResource->load($blog, $id);
-        $blogResource->delete($blog);
+        return $this->delete($this->getById($id));
     }
     
     /**
