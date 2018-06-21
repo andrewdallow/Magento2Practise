@@ -5,7 +5,7 @@ namespace Ecommistry\Blog\Block;
 use Ecommistry\Blog\Api\BlogRepositoryInterface;
 use Ecommistry\Blog\Api\TopicRepositoryInterface;
 
-use Ecommistry\Blog\Model\TopicFactory;
+use Ecommistry\Blog\Api\Data\TopicInterfaceFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
@@ -43,7 +43,7 @@ class Blog extends Template implements IdentityInterface
         Template\Context $context,
         BlogRepositoryInterface $blogRepository,
         TopicRepositoryInterface $topicRepository,
-        TopicFactory $topicFactory,
+        TopicInterfaceFactory $topicFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         ScopeConfigInterface $config
     ) {
