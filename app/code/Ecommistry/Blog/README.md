@@ -6,6 +6,10 @@ The example also shows how to install a table for the blog with an install
 script, then later, Upgrade the existing table with an update_time column 
 and a column referencing the id of a topic. A new Topic table is also added. 
 
+## Update 1.0.4
+Manually added Factories and Proxies for both \Ecommistry\Blog\Api\Data\BlogInterface 
+and \Ecommistry\Blog\Api\Data\TopicInterface. 
+
 ## Update 1.0.3
 Added Event Observer Ecommistry\Blog\Observer\SaveBlogObserver which is executed 
 when a blog entity is saved. this is defined in the events.xml file as 
