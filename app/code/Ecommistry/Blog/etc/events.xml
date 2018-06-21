@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="ecommistry_blog_save_after">
+        <observer name="blog_save_logger" instance="Ecommistry\Blog\Observer\SaveBlogObserver"/>
+    </event>
+</config>

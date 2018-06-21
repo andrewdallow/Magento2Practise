@@ -5,6 +5,7 @@
         <blogs>
             <settings>
                 <numberOfPostsToShow>5</numberOfPostsToShow>
+                <isEnabled>1</isEnabled>
             </settings>
         </blogs>
     </default>

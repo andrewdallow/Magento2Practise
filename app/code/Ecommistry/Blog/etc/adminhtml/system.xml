@@ -17,6 +17,10 @@
                        sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Number of Posts to Show</label>
                 </field>
+                <field id="isEnabled" translate="label" type="text"
+                       sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Cron Job</label>
+                </field>
             </group>
         </section>
     </system>

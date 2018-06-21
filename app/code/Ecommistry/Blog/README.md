@@ -6,6 +6,21 @@ The example also shows how to install a table for the blog with an install
 script, then later, Upgrade the existing table with an update_time column 
 and a column referencing the id of a topic. A new Topic table is also added. 
 
+## Upadate 1.0.2
+Added Event Observer Ecommistry\Blog\Observer\SaveBlogObserver which is executed 
+when a blog entity is saved. this is defined in the events.xml file as 
+'ecommistry_blog_save_after'. When the event is triggered by the Blog AbstractModel 
+a message is printed to debug.log. Mke sure debug logging is enabled in the admin 
+area beforehand. 
+
+Added a cron job with class \Ecommistry\Blog\Cron\AddPost which adds a blog post 
+to the database when using the execute method. This Cron job is scheduled in the 
+etc/crontab.xml to run every minute. 
+
+In the case of not having Crontab installed, using the Magento cli command 'cron:run' will 
+scehduale this cron job in the database and then running the command again will 
+execute the cron job. 
+
 ## Update 1.0.2
 Updated to use blog repository interface instead of Factories. 
 
