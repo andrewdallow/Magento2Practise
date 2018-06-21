@@ -6,7 +6,7 @@ The example also shows how to install a table for the blog with an install
 script, then later, Upgrade the existing table with an update_time column 
 and a column referencing the id of a topic. A new Topic table is also added. 
 
-## Upadate 1.0.3
+## Update 1.0.3
 Added Event Observer Ecommistry\Blog\Observer\SaveBlogObserver which is executed 
 when a blog entity is saved. this is defined in the events.xml file as 
 'ecommistry_blog_save_after'. When the event is triggered by the Blog AbstractModel 
