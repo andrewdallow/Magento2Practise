@@ -3,9 +3,9 @@
 namespace Ecommistry\Blog\Block;
 
 use Ecommistry\Blog\Api\BlogRepositoryInterface;
+use Ecommistry\Blog\Api\Data\TopicInterfaceFactory;
 use Ecommistry\Blog\Api\TopicRepositoryInterface;
 
-use Ecommistry\Blog\Model\TopicFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject\IdentityInterface;
@@ -29,6 +29,7 @@ class Blog extends Template implements IdentityInterface
 {
     private const XML_PATH_NUMBER_OF_POSTS_TO_SHOW = 'blogs/settings/numberOfPostsToShow';
     
+    /** @var \Ecommistry\Blog\Api\Data\TopicInterfaceFactory */
     private $topicFactory;
     /** @var \Ecommistry\Blog\Api\TopicRepositoryInterface */
     private $topicRepository;
@@ -43,7 +44,7 @@ class Blog extends Template implements IdentityInterface
         Template\Context $context,
         BlogRepositoryInterface $blogRepository,
         TopicRepositoryInterface $topicRepository,
-        TopicFactory $topicFactory,
+        TopicInterfaceFactory $topicFactory,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         ScopeConfigInterface $config
     ) {

@@ -3,6 +3,7 @@
 namespace Ecommistry\Blog\Model;
 
 use Ecommistry\Blog\Api\Data\TopicInterface;
+use Ecommistry\Blog\Api\Data\TopicInterfaceFactory;
 use Ecommistry\Blog\Api\Data\TopicSearchResultInterfaceFactory;
 use Ecommistry\Blog\Model\ResourceModel\TopicFactory as TopicResourceFactory;
 use Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory;
@@ -28,7 +29,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 class TopicRepository implements TopicRepositoryInterface
 {
-    /** @var \Ecommistry\Blog\Model\TopicFactory */
+    /** @var \Ecommistry\Blog\Api\Data\TopicInterfaceFactory */
     private $topicFactory;
     /** @var \Ecommistry\Blog\Model\ResourceModel\TopicFactory */
     private $topicResourceFactory;
@@ -40,13 +41,13 @@ class TopicRepository implements TopicRepositoryInterface
     /**
      * TopicRepository constructor.
      *
-     * @param \Ecommistry\Blog\Model\TopicFactory                          $topicFactory
+     * @param \Ecommistry\Blog\Api\Data\TopicInterfaceFactory              $topicFactory
      * @param \Ecommistry\Blog\Model\ResourceModel\TopicFactory            $topicResourceFactory
      * @param \Ecommistry\Blog\Model\ResourceModel\Topic\CollectionFactory $collectionFactory
      * @param \Ecommistry\Blog\Api\Data\TopicSearchResultInterfaceFactory  $searchResultFactory
      */
     public function __construct(
-        TopicFactory $topicFactory,
+        TopicInterfaceFactory $topicFactory,
         TopicResourceFactory $topicResourceFactory,
         CollectionFactory $collectionFactory,
         TopicSearchResultInterfaceFactory $searchResultFactory
