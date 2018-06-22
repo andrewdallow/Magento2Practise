@@ -3,6 +3,7 @@
 namespace Ecommistry\Blog\Api\Data\BlogInterface;
 
 use Ecommistry\Blog\Api\Data\BlogInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\ObjectManager\NoninterceptableInterface;
 use Magento\Framework\ObjectManagerInterface;
 
@@ -19,7 +20,10 @@ use Magento\Framework\ObjectManagerInterface;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-class Proxy implements BlogInterface, NoninterceptableInterface
+class Proxy implements
+    BlogInterface,
+    NoninterceptableInterface,
+    IdentityInterface
 {
     /** @var \Magento\Framework\ObjectManagerInterface */
     private $objectManager;

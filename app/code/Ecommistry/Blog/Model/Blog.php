@@ -2,7 +2,9 @@
 
 namespace Ecommistry\Blog\Model;
 
+use Ecommistry\Blog\Api\Data\BlogExtensionInterface;
 use Ecommistry\Blog\Api\Data\BlogInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
 /**
@@ -20,9 +22,11 @@ use Magento\Framework\Model\AbstractModel;
  * @since      Class available since Release 1.0
  */
 class Blog extends AbstractModel implements
-    BlogInterface
+    BlogInterface,
+    IdentityInterface
 {
     public const CACHE_TAG = 'ecommistry_blog';
+    private $extensionAttributes;
     
     protected function _construct()
     {
@@ -114,5 +118,24 @@ class Blog extends AbstractModel implements
     public function getIdentities()
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
+    }
+    
+    /**
+     * @return \Ecommistry\Blog\Api\Data\BlogExtensionInterface
+     */
+    public function getExtensionAttributes()
+    {
+        return $this->extensionAttributes;
+    }
+    
+    /**
+     * @param \Ecommistry\Blog\Api\Data\BlogExtensionInterface $extension
+     *
+     * @return \Ecommistry\Blog\Api\Data\BlogInterface
+     */
+    public function setExtensionAttributes(BlogExtensionInterface $extension)
+    {
+        $this->extensionAttributes = $extension;
+        return $this;
     }
 }

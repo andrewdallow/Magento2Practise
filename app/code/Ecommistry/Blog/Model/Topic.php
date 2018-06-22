@@ -43,7 +43,7 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function getTitle()
     {
-        return $this->getData('title');
+        return $this->getData(self::TOPIC_TITLE);
     }
     
     /**
@@ -51,7 +51,7 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function setTitle($title)
     {
-        $this->setData('title', $title);
+        $this->setData(self::TOPIC_TITLE, $title);
     }
     
     /**
@@ -59,7 +59,7 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function getDescription()
     {
-        return $this->getData('description');
+        return $this->getData(self::TOPIC_DESCRIPTION);
     }
     
     /**
@@ -67,6 +67,6 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function setDescription($description)
     {
-        $this->setData('description', $description);
+        $this->setData(self::TOPIC_DESCRIPTION, $description);
     }
 }
