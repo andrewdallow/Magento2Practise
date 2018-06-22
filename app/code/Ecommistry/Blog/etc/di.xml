@@ -21,4 +21,9 @@
                 type="Ecommistry\Blog\Model\TopicRepository"/>
     <preference for="Ecommistry\Blog\Api\Data\TopicSearchResultInterface"
                 type="Ecommistry\Blog\Model\TopicSearchResult"/>
+
+    <type name="Ecommistry\Blog\Model\BlogRepository">
+        <plugin name="Ecommistry_Blog_Plugin" type="Ecommistry\Blog\Plugin\SaveBlogLoggerPlugin"/>
+        <plugin name="Ecommistry_Blog_Topic_Plugin" type="Ecommistry\Blog\Plugin\BlogTopicPlugin"/>
+    </type>
 </config>

@@ -16,6 +16,8 @@ namespace Ecommistry\Blog\Api\Data;
  */
 interface TopicInterface
 {
+    public const TOPIC_TITLE = 'title';
+    public const TOPIC_DESCRIPTION = 'description';
     /**
      * @return int
      */

@@ -40,9 +40,10 @@ $collection = $block->getPosts();
                         ><?php echo $post->getTitle(); ?>
                         </a>
                     </h3>
-                    <h4>
-                        Topic: <?php echo $block->getTopicById($post->getTopicId())
-                            ->getTitle(); ?></h4>
+                    <h4>Topic: <span
+                                title="<?php echo $post->getExtensionAttributes()
+                                    ->getTopicDescription(); ?>"><?php echo $post->getExtensionAttributes()
+                                ->getTopicName(); ?></span></h4>
                     <p class="post-date">
                         <?php echo $post->getCreationTime(); ?>
                         <a href="<?php echo $block->getUrl(

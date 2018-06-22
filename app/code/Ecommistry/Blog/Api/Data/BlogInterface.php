@@ -2,7 +2,8 @@
 
 namespace Ecommistry\Blog\Api\Data;
 
-use Magento\Framework\DataObject\IdentityInterface;
+use Ecommistry\Blog\Api\Data\BlogExtensionInterface;
+use Magento\Framework\Api\ExtensibleDataInterface;
 
 /**
  * Blog API Interface
@@ -15,7 +16,7 @@ use Magento\Framework\DataObject\IdentityInterface;
  * @link       http://framework.zend.com/package/PackageName
  * @since      Class available since Release 1.0
  */
-interface BlogInterface extends IdentityInterface
+interface BlogInterface extends ExtensibleDataInterface
 {
     /**
      * @return int
@@ -84,4 +85,16 @@ interface BlogInterface extends IdentityInterface
      * @return void
      */
     public function setUpdatedTime();
+    
+    /**
+     * @return \Ecommistry\Blog\Api\Data\BlogExtensionInterface
+     */
+    public function getExtensionAttributes();
+    
+    /**
+     * @param \Ecommistry\Blog\Api\Data\BlogExtensionInterface $extension
+     *
+     * @return \Ecommistry\Blog\Api\Data\BlogInterface
+     */
+    public function setExtensionAttributes(BlogExtensionInterface $extension);
 }
