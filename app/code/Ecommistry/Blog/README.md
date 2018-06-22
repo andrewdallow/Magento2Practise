@@ -6,6 +6,11 @@ The example also shows how to install a table for the blog with an install
 script, then later, Upgrade the existing table with an update_time column 
 and a column referencing the id of a topic. A new Topic table is also added. 
 
+## Update 1.0.5
+Added Extension Attributes to Blog and a Plugin which adds the topic name and 
+description to the blog extension attributes. The Topic name and description
+can now be obtained from the blog model directly. 
+
 ## Update 1.0.4
 Manually added Factories and Proxies for both \Ecommistry\Blog\Api\Data\BlogInterface 
 and \Ecommistry\Blog\Api\Data\TopicInterface. 
