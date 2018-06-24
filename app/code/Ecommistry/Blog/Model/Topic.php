@@ -21,8 +21,12 @@ use Magento\Framework\Model\AbstractModel;
 class Topic extends AbstractModel implements TopicInterface, IdentityInterface
 {
     const CACHE_TAG = 'ecommistry_topic';
+    const TOPIC_TITLE = 'title';
+    const TOPIC_DESCRIPTION = 'description';
+    
     protected $_cacheTag = 'ecommistry_topic';
     protected $_eventPrefix = 'ecommistry_topic';
+    
     
     protected function _construct()
     {
@@ -42,7 +46,7 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
     
     public function getTitle()
     {
-        return $this->getData('title');
+        return $this->getData(self::TOPIC_TITLE);
     }
     
     /**
@@ -50,7 +54,7 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function setTitle(string $title): void
     {
-        // TODO: Implement setTitle() method.
+        $this->setData(self::TOPIC_TITLE, $title);
     }
     
     /**
@@ -58,7 +62,7 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function getDescription(): ?string
     {
-        // TODO: Implement getDescription() method.
+        return $this->getData(self::TOPIC_DESCRIPTION);
     }
     
     /**
@@ -66,6 +70,6 @@ class Topic extends AbstractModel implements TopicInterface, IdentityInterface
      */
     public function setDescription(string $description): void
     {
-        // TODO: Implement setDescription() method.
+        $this->setData(self::TOPIC_DESCRIPTION, $description);
     }
 }
