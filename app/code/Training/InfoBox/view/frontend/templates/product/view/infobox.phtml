@@ -1,0 +1,25 @@
+<?php
+/**
+ * Infobox template
+ *
+ * @category   Training
+ * @package    Training_InfoBox
+ * @copyright  Copyright (c) 2018 ecommistry (http://www.ecommistry.com)
+ * @license    http://framework.zend.com/license   BSD License
+ * @version    Release: 1.0
+ * @link       http://framework.zend.com/package/PackageName
+ * @since      Class available since Release 1.0
+ */
+
+use Training\InfoBox\Setup\InstallData;
+
+/** @var \Magento\Catalog\Block\Product\View $block */
+
+$product = $block->getProduct();
+$message
+    = $product->getCustomAttribute(InstallData::INFOBOX_ATTRIBUTE);
+?>
+
+<div class="infobox">
+    <p class="infobox-message"><?php echo $message->getValue(); ?></p>
+</div>
