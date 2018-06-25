@@ -21,7 +21,7 @@ use Magento\Framework\Logger\Handler\Base;
 class DebugHandler extends Base
 {
     /** @var string */
-    protected $fileName = '/var/log/price_changer_debug.log';
+    protected $fileName = '/var/log/custom_debug.log';
     /** @var int */
     protected $loggerType = Logger::DEBUG;
 }
