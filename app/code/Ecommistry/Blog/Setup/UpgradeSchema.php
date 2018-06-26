@@ -22,7 +22,7 @@ use Magento\Framework\Setup\UpgradeSchemaInterface;
  */
 class UpgradeSchema implements UpgradeSchemaInterface
 {
-    
+    public const TOPIC_TABLE = 'ecommistry_topic';
     /**
      * @param \Magento\Framework\Setup\SchemaSetupInterface   $setup
      * @param \Magento\Framework\Setup\ModuleContextInterface $context
@@ -37,7 +37,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
         
         if (version_compare($context->getVersion(), '1.0.1', '<')) {
             $table = $setup->getConnection()->newTable(
-                $setup->getTable('ecommistry_topic')
+                $setup->getTable(self::TOPIC_TABLE)
             )->addColumn(
                 'topic_id',
                 Table::TYPE_SMALLINT,
