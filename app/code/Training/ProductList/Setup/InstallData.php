@@ -41,8 +41,7 @@ class InstallData implements InstallDataInterface
     public function __construct(
         EavSetupFactory $eavSetupFactory,
         LoggerInterface $logger
-    )
-    {
+    ) {
         $this->logger = $logger;
         $this->eavSetupFactory = $eavSetupFactory;
     }
@@ -70,18 +69,18 @@ class InstallData implements InstallDataInterface
                 Product::ENTITY,
                 self::PRODUCT_LIST_ATTRIBUTE,
                 [
-                    'group'        => 'General',
-                    'type'         => 'int',
-                    'label'        => 'Display on Product List',
-                    'input'        => 'boolean',
-                    'class'        => '',
-                    'source'       => Boolean::class,
-                    'global'       => ScopedAttributeInterface::SCOPE_GLOBAL,
-                    'default'      => '0',
-                    'visible'      => true,
-                    'required'     => false,
-                    'user_defined' => false,
-                    'searchable'   => false,
+                    'group'                   => 'General',
+                    'type'                    => 'int',
+                    'label'                   => 'Display on Product List',
+                    'input'                   => 'boolean',
+                    'class'                   => '',
+                    'source'                  => Boolean::class,
+                    'global'                  => ScopedAttributeInterface::SCOPE_GLOBAL,
+                    'default'                 => '0',
+                    'visible'                 => true,
+                    'required'                => false,
+                    'user_defined'            => false,
+                    'searchable'              => false,
                     'filterable'              => true,
                     'comparable'              => false,
                     'visible_on_front'        => false,
