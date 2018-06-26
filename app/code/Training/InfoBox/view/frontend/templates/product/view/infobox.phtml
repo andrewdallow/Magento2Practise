@@ -19,7 +19,8 @@ $product = $block->getProduct();
 $message
     = $product->getCustomAttribute(InstallData::INFOBOX_ATTRIBUTE);
 ?>
-
+<?php if (isset($message)) : ?>
 <div class="infobox">
     <p class="infobox-message"><?php echo $message->getValue(); ?></p>
 </div>
+<?php endif; ?>
