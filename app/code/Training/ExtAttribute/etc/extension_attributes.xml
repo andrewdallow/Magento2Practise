@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Catalog\Api\Data\CategoryInterface">
+        <attribute code="country" type="string">
+            <join reference_table="training_category_country" join_on_field="entity_id" reference_field="category_id">
+                <field>country_name</field>
+            </join>
+        </attribute>
+    </extension_attributes>
+</config>
