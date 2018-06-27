@@ -10,9 +10,9 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
 
 /**
- * Class Index
+ * Class Index Controller
  *
- * Long description for Class (if any)...
+ * Controller to test extension attribute functionality.
  *
  * @category   Training
  * @package    Training_ExtAttribute
@@ -49,7 +49,7 @@ class Index extends Action
      * Note: Request will be added as operation argument in future
      *
      * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute()
     {
