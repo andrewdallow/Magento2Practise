@@ -53,7 +53,7 @@ class InstallData implements InstallDataInterface
         $setup->startSetup();
         $countries = [
             [
-                'category_id'  => '3',
+                'category_id'  => '11',
                 'country_name' => 'New Zealand'
             ],
             [
@@ -61,7 +61,7 @@ class InstallData implements InstallDataInterface
                 'country_name' => 'Australia'
             ],
             [
-                'category_id'  => '8',
+                'category_id'  => '21',
                 'country_name' => 'Japan'
             ]
         ];
