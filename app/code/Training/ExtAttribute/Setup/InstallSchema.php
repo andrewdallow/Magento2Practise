@@ -6,7 +6,7 @@ use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
-use Training\ExtAttribute\Api\Data\Category\CountryInterface;
+use Training\ExtAttribute\Api\Data\CountryInterface;
 
 /**
  * Class InstallSchema
@@ -42,38 +42,38 @@ class InstallSchema implements InstallSchemaInterface
         $setup->startSetup();
         
         $table = $setup->getConnection()->newTable(
-            $setup->getTable(self::COUNTRY_TABLE_NAME)
+            $setup->getTable(CountryInterface::TABLE_NAME)
         )->addColumn(
-            self::ID_FIELD,
-            Table::TYPE_SMALLINT,
-            null,
+            CountryInterface::ID_FIELD,
+            Table::TYPE_INTEGER,
+            10,
             [
                 'identity' => true,
                 'nullable' => false,
                 'primary'  => true,
-                'unsigned' =>
-                    true
+                'unsigned' => true
             ],
             'Category Country ID'
         )->addColumn(
-            CountryInterface::COUNTRY_CATEGORY_ID,
-            Table::TYPE_SMALLINT,
-            null,
+            CountryInterface::CATEGORY_ID,
+            Table::TYPE_INTEGER,
+            10,
             [
                 'nullable' => false,
                 'unsigned' => true
             ],
             'Category ID'
         )->addColumn(
-            CountryInterface::COUNTRY_NAME,
+            CountryInterface::COUNTRY,
             Table::TYPE_TEXT,
             255,
             ['nullable' => false],
             'Country Name'
         )->addIndex(
             'IDX_CATEGORY_COUNTRY_ID_COLUMN',
-            self::ID_FIELD
-        );
+            CountryInterface::ID_FIELD
+        )->setComment('Category Country');
+        
         $setup->getConnection()->createTable($table);
         $setup->endSetup();
     }

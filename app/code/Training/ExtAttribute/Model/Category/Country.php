@@ -3,7 +3,7 @@
 namespace Training\ExtAttribute\Model\Category;
 
 use Magento\Framework\Model\AbstractModel;
-use Training\ExtAttribute\Api\Data\Category\CountryInterface;
+use Training\ExtAttribute\Api\Data\CountryInterface;
 
 /**
  * Class Country
@@ -30,9 +30,9 @@ class Country extends AbstractModel implements CountryInterface
     /**
      * @return string
      */
-    public function getCountryName()
+    public function getCountry()
     {
-        return $this->getData(self::COUNTRY_NAME);
+        return $this->getData(self::COUNTRY);
     }
     
     /**
@@ -40,9 +40,9 @@ class Country extends AbstractModel implements CountryInterface
      *
      * @return void
      */
-    public function setCountryName($name)
+    public function setCountry($name)
     {
-        $this->setData(self::COUNTRY_NAME, $name);
+        $this->setData(self::COUNTRY, $name);
     }
     
     /**
@@ -50,7 +50,7 @@ class Country extends AbstractModel implements CountryInterface
      */
     public function getCategoryId()
     {
-        return $this->getData(self::COUNTRY_CATEGORY_ID);
+        return $this->getData(self::CATEGORY_ID);
     }
     
     /**
@@ -60,7 +60,7 @@ class Country extends AbstractModel implements CountryInterface
      */
     public function setCategoryId($id)
     {
-        $this->setData(self::COUNTRY_CATEGORY_ID, $id);
+        $this->setData(self::CATEGORY_ID, $id);
     }
     
 }

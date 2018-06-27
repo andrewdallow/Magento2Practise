@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Training\ExtAttribute\Api\Data\CountryInterface"
+                type="Training\ExtAttribute\Model\Category\Country"/>
+    <preference for="Training\ExtAttribute\Api\CountryRepositoryInterface"
+                type="Training\ExtAttribute\Model\Category\CountryRepository"/>
+    <type name="Magento\Catalog\Api\CategoryRepositoryInterface">
+        <plugin name="category_country"
+                type="Training\ExtAttribute\Plugin\CategoryCountryRepositoryPlugin"/>
+    </type>
+
+</config>
