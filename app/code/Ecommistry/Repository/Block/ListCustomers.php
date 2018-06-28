@@ -56,7 +56,7 @@ class ListCustomers extends Template
      *
      * @return \Ecommistry\Repository\Api\Data\CustomerInterface[]
      */
-    public function getCustomersByCountryName(string $name)
+    public function getCustomersByCountryName(string $name): array
     {
         /** @var \Ecommistry\Repository\Api\CustomerRepositoryInterface $customerRepository */
         $customerRepository = $this->customerRepository->create();

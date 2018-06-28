@@ -7,9 +7,9 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
- * Class Index
+ * Class Index Controller
  *
- * Long description for Class (if any)...
+ * Demo Controller showing customer information.
  *
  * @category   Ecommistry
  * @package    Ecommistry_Repository
